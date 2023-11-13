@@ -111,7 +111,7 @@ class AuthController extends Controller
     //     }
     //     return view('admin.dashboard',compact('data'));
 
-        
+       // 
     // }
     public function logout()
     {
