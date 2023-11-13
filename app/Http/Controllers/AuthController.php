@@ -103,16 +103,7 @@ class AuthController extends Controller
 
         }
      }
-    // public function dashboard()
-    // {
-    //     $data=array();
-    //     if(Session::has('loginId')){
-    //         $data = User::where ('id','=', Session::get('loginId'))->first(); 
-    //     }
-    //     return view('admin.dashboard',compact('data'));
 
-       // 
-    // }
     public function logout()
     {
         if(Session::has('loginId')){
