@@ -35,7 +35,7 @@
           </li>
           <li class="nav-item">
             <a href="{{url('admin/class/list')}}" class="nav-link">
-              <i class="nav-icon far fa-user"></i>
+             <i class="fas fa-graduation-cap"></i>
               <p>
                 Class
               </p>
@@ -81,18 +81,18 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 style="font-weight: bold; text-align: left;">Admin List</h1>
+                    <h1 style="font-weight: bold; text-align: left;">Assign Subject List</h1>
                 </div>
                 <div class="col-sm-6" style="text-align:right;">
-                  <form action="{{url('admin/admin/search')}}" method="GET" class="form-inline">
+                    <form action="{{url('admin/subject/search')}}" method="GET" class="form-inline">
                     <div class="input-group">
                         <input type="text" name="search" class="form-control" placeholder="Search by name">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                         </div>
                     </div>
-                  </form>
-                    <a href="{{url('admin/admin/add')}}" class="btn btn-primary">Add New Admin</a>
+                    </form>
+                    <a href="{{url('admin/assign_subject/add')}}" class="btn btn-primary">Add New Subject</a>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -110,7 +110,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 style="font-weight: bold; text-align: Center;">All Admin</h3>
+                            <h3 style="font-weight: bold; text-align: Center;">All Class And Subjects</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body p-0">
@@ -118,27 +118,38 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 10px">#</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Number</th>
+                                        <th>Class Name</th>
+                                        <th>Subject Name</th>
+                                        <th>Created at</th>
+                                        <th>Created by</th>
+                                        <th>Status</th>
                                         <th>Action</th>
+
                                     </tr>
-                                </thead>
-                                <tbody>
+                                    <tbody>
                                     @foreach($getRecord as $key)
                                     <tr>
                                         <td>{{ $key->id }}</td>
-                                        <td>{{ $key->name }}</td>
-                                        <td>{{ $key->email }}</td>
-                                        <td>{{ $key->number }}</td>
+                                        <td>{{ $key->class_name }}</td>
+                                        <td>{{ $key->subject_name }}</td>
+                                        <td>{{ $key->created_at }}</td>
+                                        <td>{{ $key->created_by_name }}</td>
                                         <td>
-                                          <a href="{{url('admin/admin/edit/'.$key->id)}}"class="btn btn-primary">Edit</a>
-                                          <a href="{{url('admin/admin/delete/'.$key->id)}}"class="btn btn-danger">Delete</a>
+                                            @if($key->status==0)
+                                                Active
+                                            @else
+                                                Inactive
+                                            @endif
+                                        </td>
+                                        <td>
+                                          <a href="{{url('admin/assign_subject/edit/'.$key->id)}}"class="btn btn-primary">Edit</a>
+                                          <a href="{{url('admin/assign_subject/delete/'.$key->id)}}"class="btn btn-danger">Delete</a>
 
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
+
                             </table>
                         </div>
                         <!-- /.card-body -->
@@ -155,4 +166,6 @@
 </div>
 <!-- /.content-wrapper -->
 @endsection
+
+
 

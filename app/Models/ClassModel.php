@@ -9,15 +9,25 @@ class ClassModel extends Model
 {
     use HasFactory;
     protected $table = "class";
-    static public function getclass(){
+    static public function getClass(){
         return self::select('class.*','users.name as created_by_name')
         ->join('users','users.id','class.created_by')
         // ->where('status', '=',0)
-        // ->where('is_deleted','=',0)
+        ->where('class.is_deleted','=',0)
         ->orderBy('id','desc')
         ->get();
     }
     static public function getSingle($id){
         return self::find($id);
     }
+    static public function getClasses(){
+        return self::select('class.*')
+        // ->join('users','users.id','class.created_by')
+        ->where('class.status', '=',0)
+        ->where('class.is_deleted','=',0)
+        
+        ->orderBy('class.name','asc')
+        ->get();
+    }
+
 }

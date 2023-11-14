@@ -42,6 +42,22 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{url('admin/subject/list')}}" class="nav-link">
+             <i class="fas fa-graduation-cap"></i>
+              <p>
+                Subject
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('admin/assign_subject/list')}}" class="nav-link">
+             <i class="fas fa-graduation-cap"></i>
+              <p>
+                Assign Subject
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
                 <a href="{{url('logout')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Logout</p>
@@ -125,7 +141,7 @@
                                         </td>
                                         <td>
                                           <a href="{{url('admin/class/edit/'.$key->id)}}"class="btn btn-primary">Edit</a>
-                                          <a href="{{url('admin/admin/delete/'.$key->id)}}"class="btn btn-danger">Delete</a>
+                                          <a href="{{url('admin/classs/delete/'.$key->id)}}"class="btn btn-danger">Delete</a>
 
                                         </td>
                                     </tr>

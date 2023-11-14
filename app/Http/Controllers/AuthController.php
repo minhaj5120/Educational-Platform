@@ -100,24 +100,7 @@ class AuthController extends Controller
         } else {
             return back()->with('fail', 'Incorrect Email');
         }
-<<<<<<< HEAD
     }
-    
-    
-    // public function dashboard()
-    // {
-    //     $data=array();
-    //     if(Session::has('loginId')){
-    //         $data = User::where ('id','=', Session::get('loginId'))->first(); 
-    //     }
-    //     return view('admin.dashboard',compact('data'));
-=======
-        else{
-            return back() ->with('fail','Incorrect Email');
-
-        }
-     }
->>>>>>> b0f5fc8d2ea2501392b7636dd72db1bd3f286bda
 
     public function logout()
     {

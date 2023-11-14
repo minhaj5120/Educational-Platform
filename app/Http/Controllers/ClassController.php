@@ -56,4 +56,16 @@ class ClassController extends Controller
         $user->save();
         return redirect("admin/class/list")->with("success","Class Updateed Successfully");
     }
+    public function delete($id){
+        $class = ClassModel::find($id);
+    
+        if (!$class) {
+            // Handle the case where the record with the given ID is not found.
+            return redirect("admin/class/list")->with("error","Class not found");
+        }
+    
+        $class->delete(); // This will delete the record from the database.
+    
+        return redirect("admin/class/list")->with("success","Class Deleted Successfully");
+    }
 }

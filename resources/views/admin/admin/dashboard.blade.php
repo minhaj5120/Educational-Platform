@@ -42,6 +42,21 @@
               </p>
             </a>
           </li>
+          <a href="{{url('admin/class/list')}}" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Subject
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('admin/assign_subject/list')}}" class="nav-link">
+             <i class="fas fa-graduation-cap"></i>
+              <p>
+                Assign Subject
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
                 <a href="{{url('logout')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
