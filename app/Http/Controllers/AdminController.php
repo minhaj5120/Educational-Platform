@@ -67,3 +67,6 @@ class AdminController extends Controller
     return view('admin/admin/list',$data);
     }
 }
+
+
+// can you see these changes?
