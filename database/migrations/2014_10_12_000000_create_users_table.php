@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('Mobile Number');
             $table->string('User Type');
+            $table->string('remember_token');
 
             $table->timestamps();
         });

@@ -16,19 +16,22 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!empty(Auth::check())){
-            if(Auth::User()->category == 1){
-                return $next($request); 
+
+        if (Auth::check()) {
+            $user = Auth::user();
+            if($user->category == 1){
+                return $next($request);
             }
             else{
                 Auth::logout();
-                return redirect("/");
+                return redirect("login");
             }
+
         }
         else{
             Auth::logout();
-            return redirect("/");
-        }
+            return redirect("login");
 
+        }
     }
 }

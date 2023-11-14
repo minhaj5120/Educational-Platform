@@ -43,4 +43,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    static public function getAdmin(){
+        return self::select('users.*')
+        ->where('category', '=',1)
+        ->where('is_deleted','=',0)
+        ->orderBy('id','desc')
+        ->get();
+    }
+    static public function getSingle($id){
+        return self::find($id);
+    }
+
 }

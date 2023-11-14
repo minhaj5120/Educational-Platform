@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
-use Session;
 use Hash;
 use App\Models\User;
 
@@ -54,7 +53,8 @@ class AuthController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user(); // Get the authenticated user
-    
+            
+
             if ($user->category == 1) {
                 return view('admin.dashboard');
             } elseif ($user->category == 2) {
@@ -71,38 +71,38 @@ class AuthController extends Controller
     {
         // Attempt to authenticate the user using the provided email and password.
         $request->validate([
-            "email"=> "required|email",
-            "password"=> "required|min:8",
-            
+            "email" => "required|email",
+            "password" => "required|min:8",
         ]);
-        $user = User::where ('email','=', $request->email)->first();
-        if($user){
-            if(Hash::check($request->password, $user->password)){
-                if($user->category == 1){
-                    $request ->session() -> put('loginId',$user ->id);
-                    return view('admin.dashboard');
+    
+        $user = User::where('email', '=', $request->email)->first();
+    
+        if ($user) {
+            if (Hash::check($request->password, $user->password)) {
+                // Authenticate the user
+                Auth::login($user);
+                
+    
+                // Now, you can access the authenticated user using Auth::user()
+                $authenticatedUser = Auth::user();
+                
+    
+                if ($user->category == 1) {
+                    return redirect()->route('admin.dashboard');
+                } elseif ($user->category == 2) {
+                    return redirect()->route('student.dashboard');
+                } elseif ($user->category == 3) {
+                    return redirect()->route('teacher.dashboard');
                 }
-                else if($user->category == 2)
-                {
-                    $request ->session() -> put('loginId',$user ->id);
-                    return view('student.dashboard');
-                }
-                else if($user->category == 3)
-                {
-                    $request ->session() -> put('loginId',$user ->id);
-                    return view('teacher.dashboard');
-                }
-
+            } else {
+                return back()->with('fail', 'Incorrect Password');
             }
-            else{
-                return back() ->with('fail','Incorrect Password');
-            }
+        } else {
+            return back()->with('fail', 'Incorrect Email');
         }
-        else{
-            return back() ->with('fail','Incorrect Email');
-
-        }
-     }
+    }
+    
+    
     // public function dashboard()
     // {
     //     $data=array();
@@ -115,9 +115,7 @@ class AuthController extends Controller
     // }
     public function logout()
     {
-        if(Session::has('loginId')){
-            Session::pull('loginId');
-            return redirect('login');
-        }
+        Auth::logout();
+        return redirect()->route('login');
     }
 }
