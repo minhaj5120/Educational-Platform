@@ -7,6 +7,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ClassSubjectController;
+use App\Http\Controllers\AdminTeacherController;
+use App\Http\Controllers\AdminStudentController;
+
+
+
 
 //use Auth;
 /*
@@ -67,6 +72,7 @@ Route::get('/logout', [AuthController::class, 'logout']);
 Route::group(['middleware' => 'Admin'], function () {
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard1'])->name('admin.dashboard');
     Route::get('admin/admin/dashboard', [DashboardController::class, 'dashboard1']);
+    //admin
     Route::get('admin/admin/list', [AdminController::class, 'list']);
     Route::get('admin/admin/add', [AdminController::class, 'add']);
     Route::post('admin/admin/add', [AdminController::class, 'insert']);
@@ -74,6 +80,24 @@ Route::group(['middleware' => 'Admin'], function () {
     Route::post('admin/admin/edit/{id}', [AdminController::class, 'update']);
     Route::get('admin/admin/delete/{id}', [AdminController::class, 'delete']);
     Route::get('admin/admin/search', [AdminController::class, 'search']);
+
+    //teacher
+    Route::get('admin/teacher/list', [AdminTeacherController::class, 'list']);
+    Route::get('admin/teacher/add', [AdminTeacherController::class, 'add']);
+    Route::post('admin/teacher/add', [AdminTeacherController::class, 'insert']);
+    Route::get('admin/teacher/edit/{id}', [AdminTeacherController::class, 'edit']);
+    Route::post('admin/teacher/edit/{id}', [AdminTeacherController::class, 'update']);
+    Route::get('admin/teacher/delete/{id}', [AdminTeacherController::class, 'delete']);
+    Route::get('admin/teacher/search', [AdminTeacherController::class, 'search']);
+
+    //student
+    Route::get('admin/student/list', [AdminStudentController::class, 'list']);
+    Route::get('admin/student/add', [AdminStudentController::class, 'add']);
+    Route::post('admin/student/add', [AdminStudentController::class, 'insert']);
+    Route::get('admin/student/edit/{id}', [AdminStudentController::class, 'edit']);
+    Route::post('admin/student/edit/{id}', [AdminStudentController::class, 'update']);
+    Route::get('admin/student/delete/{id}', [AdminStudentController::class, 'delete']);
+    Route::get('admin/student/search', [AdminStudentController::class, 'search']);
     
 
     //class

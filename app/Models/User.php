@@ -52,6 +52,20 @@ class User extends Authenticatable
         ->orderBy('id','desc')
         ->get();
     }
+    static public function getTeacher(){
+        return self::select('users.*')
+        ->where('category', '=',3)
+        ->where('is_deleted','=',0)
+        ->orderBy('id','desc')
+        ->get();
+    }
+    static public function getStudent(){
+        return self::select('users.*')
+        ->where('category', '=',2)
+        ->where('is_deleted','=',0)
+        ->orderBy('id','desc')
+        ->get();
+    }
     static public function getSingle($id){
         return self::find($id);
     }

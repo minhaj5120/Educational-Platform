@@ -7,12 +7,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-md-12 text-center">
-                <h1 style="font-weight: bold;">Assign Subject List</h1>
+                <h1 style="font-weight: bold;">Student List</h1>
             </div>
         </div>
         <div class="row mb-6">
             <div class="col-md-6">
-                <form action="{{url('admin/subject/search')}}" method="GET" class="form-inline">
+                <form action="{{url('admin/student/search')}}" method="GET" class="form-inline">
                     <div class="input-group">
                         <input type="text" name="search" class="form-control" placeholder="Search by name">
                         <div class="input-group-append">
@@ -22,7 +22,7 @@
                 </form>
             </div>
             <div class="col-md-6 text-right">
-                <a href="{{url('admin/assign_subject/add')}}" class="btn btn-primary">Add New Subject</a>
+                <a href="{{url('admin/student/add')}}" class="btn btn-primary">Add New Student</a>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -41,7 +41,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 style="font-weight: bold; text-align: Center;">All Class And Subjects</h3>
+                            <h3 style="font-weight: bold; text-align: Center;">All Students</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body p-0">
@@ -49,38 +49,27 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 10px">#</th>
-                                        <th>Class Name</th>
-                                        <th>Subject Name</th>
-                                        <th>Created at</th>
-                                        <th>Created by</th>
-                                        <th>Status</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Number</th>
                                         <th>Action</th>
-
                                     </tr>
-                                    <tbody>
+                                </thead>
+                                <tbody>
                                     @foreach($getRecord as $key)
                                     <tr>
                                         <td>{{ $key->id }}</td>
-                                        <td>{{ $key->class_name }}</td>
-                                        <td>{{ $key->subject_name }}</td>
-                                        <td>{{ $key->created_at }}</td>
-                                        <td>{{ $key->created_by_name }}</td>
+                                        <td>{{ $key->name }}</td>
+                                        <td>{{ $key->email }}</td>
+                                        <td>{{ $key->number }}</td>
                                         <td>
-                                            @if($key->status==0)
-                                                Active
-                                            @else
-                                                Inactive
-                                            @endif
-                                        </td>
-                                        <td>
-                                          <a href="{{url('admin/assign_subject/edit/'.$key->id)}}"class="btn btn-primary">Edit</a>
-                                          <a href="{{url('admin/assign_subject/delete/'.$key->id)}}"class="btn btn-danger">Delete</a>
+                                          <a href="{{url('admin/student/edit/'.$key->id)}}"class="btn btn-primary">Edit</a>
+                                          <a href="{{url('admin/student/delete/'.$key->id)}}"class="btn btn-danger">Delete</a>
 
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
-
                             </table>
                         </div>
                         <!-- /.card-body -->
@@ -97,6 +86,4 @@
 </div>
 <!-- /.content-wrapper -->
 @endsection
-
-
 

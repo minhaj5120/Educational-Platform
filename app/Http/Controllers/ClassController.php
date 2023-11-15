@@ -32,7 +32,7 @@ class ClassController extends Controller
     $data['header_title'] = "Class List";
     $search = $request->input('search');
 
-    // Add your search logic here, for example, use the Eloquent query to filter records based on the name.
+
     $data['getRecord'] = ClassModel::where('name', 'like', '%' . $search . '%')->get();
 
     return view('admin/class/list',$data);
@@ -60,11 +60,11 @@ class ClassController extends Controller
         $class = ClassModel::find($id);
     
         if (!$class) {
-            // Handle the case where the record with the given ID is not found.
+            
             return redirect("admin/class/list")->with("error","Class not found");
         }
     
-        $class->delete(); // This will delete the record from the database.
+        $class->delete(); 
     
         return redirect("admin/class/list")->with("success","Class Deleted Successfully");
     }

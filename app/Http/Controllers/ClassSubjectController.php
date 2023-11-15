@@ -64,11 +64,11 @@ class ClassSubjectController extends Controller
         $subject = ClassSubjectModel::find($id);
     
         if (!$subject) {
-            // Handle the case where the record with the given ID is not found.
+            
             return redirect("admin/sassign_ubject/list")->with("error","Subject not found");
         }
     
-        $subject->delete(); // This will delete the record from the database.
+        $subject->delete(); 
     
         return redirect("admin/assign_subject/list")->with("success","Subject Deleted Successfully");
     }
@@ -78,7 +78,7 @@ class ClassSubjectController extends Controller
     $data['header_title'] = "Subject List";
     $search = $request->input('search');
 
-    // Add your search logic here, for example, use the Eloquent query to filter records based on the name.
+    
     $data['getRecord'] = ClassSubjectModel::where('type', 'like', '%' . $search . '%')->get();
 
     return view('admin/assign_subject/list',$data);

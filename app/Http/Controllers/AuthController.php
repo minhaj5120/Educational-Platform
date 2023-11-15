@@ -14,9 +14,9 @@ class AuthController extends Controller
         $request->validate([
             "name" => "required",
             "email" => "required|email|unique:users",
-            "password" => "required|min:8",
+            "password" => "required|",
             "number" => "required|numeric",
-            "category" => "required|in:admin,student,teacher", // Validate the category selection
+            "category" => "required|in:student,teacher",
         ]);
     
         $user = new User();
@@ -25,9 +25,8 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->number = $request->number;
         
-        // Map the category selection to a value and save it
         $category = $request->category;
-        $categoryValue = 1; // Default to 1 (admin)
+        $categoryValue = 1;
         
         if ($category === 'student') {
             $categoryValue = 2;
@@ -35,7 +34,7 @@ class AuthController extends Controller
             $categoryValue = 3;
         }
         
-        $user->category = $categoryValue; // Store the category value in the database
+        $user->category = $categoryValue;
         
         $result = $user->save();
         
@@ -52,7 +51,7 @@ class AuthController extends Controller
     public function login()
     {
         if (Auth::check()) {
-            $user = Auth::user(); // Get the authenticated user
+            $user = Auth::user();
             
 
             if ($user->category == 1) {
@@ -69,7 +68,6 @@ class AuthController extends Controller
 
     public function Authlogin(Request $request)
     {
-        // Attempt to authenticate the user using the provided email and password.
         $request->validate([
             "email" => "required|email",
             "password" => "required|min:8",
@@ -79,11 +77,10 @@ class AuthController extends Controller
     
         if ($user) {
             if (Hash::check($request->password, $user->password)) {
-                // Authenticate the user
                 Auth::login($user);
                 
     
-                // Now, you can access the authenticated user using Auth::user()
+                
                 $authenticatedUser = Auth::user();
                 
     

@@ -19,18 +19,12 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="" class="h1"><b>Login</b></a>
+        <h1>Educational Platform</h1>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Educational Platform</p>
+      <p class="login-box-msg">Login</p>
 
      <form action="{{ route('Authlogin') }}" method="POST">
-        @if(Session::has('success'))
-        <div class="alert alert-success">{{Session::get('success')}}</div>
-        @endif
-        @if(Session::has('fail'))
-        <div class="alert alert-danger">{{Session::get('fail')}}</div>
-        @endif
         @csrf
         <div class="input-group mb-3">
           <input type="email" class="form-control" required name="email" placeholder="Email">

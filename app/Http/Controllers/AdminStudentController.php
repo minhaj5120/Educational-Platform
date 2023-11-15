@@ -6,16 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Hash;
 
-class AdminController extends Controller
+class AdminStudentController extends Controller
 {
     public function list(){
-        $data['header_title'] = "Admin List";
-        $data['getRecord']=User::getAdmin();
-        return view("admin.admin.list", $data);
+        $data['header_title'] = "Student List";
+        $data['getRecord']=User::getStudent();
+        return view("admin.student.list", $data);
     }
     public function add(){
-        $data['header_title'] = "Add New Admin";
-        return view("admin.admin.add", $data);
+        $data['header_title'] = "Add New student";
+        return view("admin.student.add", $data);
     }
     public function insert(Request $request){
         
@@ -25,17 +25,17 @@ class AdminController extends Controller
         $user->email = trim($request->email);
         $user->number = trim($request->number);
         $user->password = Hash::make($request->password);
-        $categoryValue = 1;
+        $categoryValue = 2;
         $user->category = $categoryValue;
         $user->save();
-        return redirect("admin/admin/list")->with("success","New Admin Added Successfully");
+        return redirect("admin/student/list")->with("success","New Student Added Successfully");
     }
     public function edit($id){
         
         $data['getRecord']=User::getSingle($id);
         if(!empty($data['getRecord'])){
             $data['header_title'] = "Edit";
-            return view("admin.admin.edit", $data);
+            return view("admin.student.edit", $data);
         }
         else{
             abort(404);	
@@ -48,21 +48,26 @@ class AdminController extends Controller
         $user->email = trim($request->email);
         $user->number = trim($request->number);
         $user->save();
-        return redirect("admin/admin/list")->with("success","Admin Updateed Successfully");
+        return redirect("admin/student/list")->with("success","Student Updateed Successfully");
     }
     public function delete($id){
-        $user = User::getSingle($id);
-        $user->is_deleted =1;
-        $user->save();
-        return redirect("admin/admin/list")->with("success","Admin Deleted Successfully");
+        $teacher = User::find($id);
+    
+        if (!$teacher) {
+            return redirect("admin/student/list")->with("error","Student not found");
+        }
+    
+        $teacher->delete();
+    
+        return redirect("admin/student/list")->with("success","Student deleted Successfully");
     }
     public function search(Request $request)
     {
-    $data['header_title'] = "Class List";
+    $data['header_title'] = "Student List";
     $search = $request->input('search');
 
     $data['getRecord'] = User::where('name', 'like', '%' . $search . '%')->get();
 
-    return view('admin/admin/list',$data);
+    return view('admin/student/list',$data);
     }
 }

@@ -14,14 +14,14 @@ class DashboardController extends Controller
         if (Auth::check()) {
             $user = Auth::user();
     
-            if ($user->category == 1) { // Change variable name to $users
-                    return view('admin.dashboard',$data); // Pass $users to the view
+            if ($user->category == 1) {
+                    return view('admin.dashboard',$data);
                 }
-            elseif ($user->category == 3) { // Change variable name to $users
-                    return view('teacher.dashboard',$data); // Pass $users to the view
+            elseif ($user->category == 3) { 
+                    return view('teacher.dashboard',$data); 
                 }
-            elseif ($user->category == 2) { // Change variable name to $users
-                    return view('student.dashboard',$data); // Pass $users to the view
+            elseif ($user->category == 2) { 
+                    return view('student.dashboard',$data); 
                 }
     
         return view('Auth.login');
@@ -29,10 +29,8 @@ class DashboardController extends Controller
     }
     public function logout()
     {
-        if(Session::has('loginId')){
-            Session::pull('loginId');
-            return redirect('login');
-        }
+        Auth::logout();
+        return redirect()->route('login');
     }
 }
 
