@@ -20,7 +20,7 @@ class Admin
         if (Auth::check()) {
             $user = Auth::user();
             if($user->category == 1){
-                return $next($request);
+                return $next($request);           //next->admin dashboard
             }
             else{
                 Auth::logout();
