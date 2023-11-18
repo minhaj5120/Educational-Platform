@@ -9,6 +9,8 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ClassSubjectController;
 use App\Http\Controllers\AdminTeacherController;
 use App\Http\Controllers\AdminStudentController;
+use App\Http\Controllers\ClassTeacherController;
+
 
 
 
@@ -128,6 +130,15 @@ Route::group(['middleware' => 'Admin'], function () {
     Route::post('admin/assign_subject/edit/{id}', [ClassSubjectController::class, 'update']);
     Route::get('admin/assign_subject/delete/{id}', [ClassSubjectController::class, 'delete']);
     Route::get('admin/assign_subject/search', [ClassSubjectController::class, 'search']);
+
+    //assign_class_teacher
+    Route::get('admin/assign_class_teacher/list', [ClassTeacherController::class, 'list']);
+    Route::get('admin/assign_class_teacher/add', [ClassTeacherController::class, 'add']);
+    Route::post('admin/assign_class_teacher/add', [ClassTeacherController::class, 'insert']);
+    Route::get('admin/assign_class_teacher/edit/{id}', [ClassTeacherController::class, 'edit']);
+    Route::post('admin/assign_class_teacher/edit/{id}', [ClassTeacherController::class, 'update']);
+    Route::get('admin/assign_class_teacher/delete/{id}', [ClassTeacherController::class, 'delete']);
+    Route::get('admin/assign_class_teacher/search', [ClassTeacherController::class, 'search']);
 
 });
 Route::group(['middleware' => 'Teacher'], function () {

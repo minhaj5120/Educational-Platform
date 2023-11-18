@@ -77,6 +77,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{url('admin/assign_class_teacher/list')}}" class="nav-link">
+             <i class="fas fa-graduation-cap"></i>
+              <p>
+                Assign Class Teacher
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
                 <a href="{{url('logout')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Logout</p>
