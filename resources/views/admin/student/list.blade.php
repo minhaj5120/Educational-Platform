@@ -49,7 +49,11 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 10px">#</th>
-                                        <th>Name</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Roll Number</th>
+                                        <th>Admission Number</th>
+                                       <!-- <th>Class</th>  -->
                                         <th>Email</th>
                                         <th>Number</th>
                                         <th>Action</th>
@@ -60,6 +64,10 @@
                                     <tr>
                                         <td>{{ $key->id }}</td>
                                         <td>{{ $key->name }}</td>
+                                        <td>{{ $key->last_name }}</td>
+                                        <td>{{ $key->roll_number }}</td>
+                                        <td>{{ $key->admission_number }}</td>
+                                        <!-- <td>{{ $key->class_id }}</td>  -->
                                         <td>{{ $key->email }}</td>
                                         <td>{{ $key->number }}</td>
                                         <td>
