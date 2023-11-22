@@ -21,7 +21,7 @@
 
         @if(Auth::user()->category==1)
           <li class="nav-item">
-            <a href="{{url('admin/admin/dashboard')}}" class="nav-link">
+            <a href="{{url('admin/admin/dashboard')}}" class="nav-link @if(Request::segment(3)=='dashboard') active @endif">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -29,7 +29,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('admin/admin/list')}}" class="nav-link">
+            <a href="{{url('admin/admin/list')}}" class="nav-link @if(Request::segment(2)=='admin' && Request::segment(3)=='list') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
                 Admin
@@ -37,7 +37,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('admin/teacher/list')}}" class="nav-link">
+            <a href="{{url('admin/teacher/list')}}" class="nav-link @if(Request::segment(2)=='teacher') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
                 Teacher
@@ -45,15 +45,24 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('admin/student/list')}}" class="nav-link">
+            <a href="{{url('admin/student/list')}}" class="nav-link @if(Request::segment(2)=='student') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
                 Student
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{url('admin/class/list')}}" class="nav-link">
+          <li class="nav-item @if(Request::segment(2)=='class' || Request::segment(2)=='subject' || Request::segment(2)=='assign_subject' || Request::segment(2)=='assign_class_teacher' || Request::segment(2)=='class_time') menu-is-opening menu-open @endif">
+            <a href="#" class="nav-link @if(Request::segment(2)=='class' || Request::segment(2)=='subject' || Request::segment(2)=='assign_subject' || Request::segment(2)=='assign_class_teacher' || Request::segment(2)=='class_time') active @endif">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Academics
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+            <li class="nav-item">
+            <a href="{{url('admin/class/list')}}" class="nav-link @if(Request::segment(2)=='class') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
                 Class
@@ -61,7 +70,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('admin/subject/list')}}" class="nav-link">
+            <a href="{{url('admin/subject/list')}}" class="nav-link @if(Request::segment(2)=='subject') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
                 Subject
@@ -69,7 +78,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('admin/assign_subject/list')}}" class="nav-link">
+            <a href="{{url('admin/assign_subject/list')}}" class="nav-link @if(Request::segment(2)=='assign_subject') active @endif">
              <i class="fas fa-graduation-cap"></i>
               <p>
                 Assign Subject
@@ -77,7 +86,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('admin/assign_class_teacher/list')}}" class="nav-link">
+            <a href="{{url('admin/assign_class_teacher/list')}}" class="nav-link @if(Request::segment(2)=='assign_class_teacher') active @endif">
              <i class="fas fa-graduation-cap"></i>
               <p>
                 Assign Class Teacher
@@ -85,9 +94,20 @@
             </a>
           </li>
           <li class="nav-item">
-                <a href="{{url('logout')}}" class="nav-link">
+            <a href="{{url('admin/class_time/list')}}" class="nav-link @if(Request::segment(2)=='class_time') active @endif">
+             <i class="fas fa-graduation-cap"></i>
+              <p>
+                Class Time
+              </p>
+            </a>
+          </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+                <a href="{{url('admin/change_password')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Logout</p>
+                  <p>Change Password</p>
                 </a>
           </li>
         @elseif(Auth::user()->category==2)
@@ -108,9 +128,9 @@
             </a>
           </li>
           <li class="nav-item">
-                <a href="{{url('logout')}}" class="nav-link">
+                <a href="{{url('student/change_password')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Logout</p>
+                  <p>Change Password</p>
                 </a>
           </li>
         @elseif(Auth::user()->category==3)
@@ -123,7 +143,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('teacher/list')}}" class="nav-link">
+            <a href="{{url('teacher/my_student')}}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
               <p>
                 My Student
@@ -131,7 +151,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('teacher/list')}}" class="nav-link">
+            <a href="{{url('teacher/my_class_subject')}}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
               <p>
                 My class and subject
@@ -195,13 +215,21 @@
             </a>
           </li>
           <li class="nav-item">
+                <a href="{{url('teacher/change_password')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Change Password</p>
+                </a>
+          </li>
+
+
+        @endif
+
+          <li class="nav-item">
                 <a href="{{url('logout')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Logout</p>
                 </a>
           </li>
-
-        @endif
 
         </ul>
       </nav>

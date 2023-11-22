@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Class</title>
+    <title>Change Password</title>
     <!-- Include Bootstrap CSS from a CDN -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -25,23 +25,32 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-container">
-                    <h1 class="text-center">Assign New Class</h1>
+                    <h1 class="text-center">Change Password</h1>
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <form action="" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="name">Class Name</label>
-                            <input type="text" class="form-control" name="name" required>
+                            <label for="old_password">Old Password</label>
+                            <input type="text" class="form-control" name="old_password" required>
+                        </div>
         
                         <div class="form-group">
-                            <label for="text">Status</label>
-                            <select class="form-control" name="status" required>
-                                <option value="0">Active</option>
-                                <option value="1">Inactive</option>
-                            </select>
-                
+                            <label for="new_password">New Password</label>
+                            <input type="text" class="form-control" name="new_password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block" name="Submit">Submit</button>
+                        <button type="submit" class="btn btn-primary btn-block" name="Submit">Change Password</button>
                     </form>
+
                 </div>
             </div>
         </div>

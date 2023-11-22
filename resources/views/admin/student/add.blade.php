@@ -26,8 +26,8 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Add New Admin</h1>
+                <div class="col-sm-6" style="text-align:right">
+                    <h1>Add New Student</h1>
 
 
                 </div>
@@ -43,8 +43,8 @@
                 <!-- left colum -->
                 <div class="col-md-12">
                     <div class="card card-primary">
-                        <form method="post" action="">
-                            {{ csrf_field() }}
+                        <form method="post" action="" enctype="multipart/form-data">
+                            @csrf
                             <div class="form-group row">
                                 <div class="col-md-6">
                                     <label for="name">First Name <span style="color: red;">*</span></label>
@@ -85,7 +85,10 @@
                                     <label>Class <span style="color: red;">*</span></label>
                                     <select class="form-control" required name="class_id">
                                         <option value="">Select Class</option>
-                                        <option value="11">11 </option>
+                                        @foreach($classes as $class)
+                                            <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                        @endforeach
+                                    </select>
                 
                                 </div>
                                 <div class="form-group col-md-6">
@@ -161,71 +164,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
 </body> 
 </html>
-<!--                         
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-container">
-                    <h1 class="text-center">Add New Student</h1>
-                    <form action="" method="POST">
-                        @csrf
-                        <div class="form-group col-md-6">
-                            <label for="name">First Name <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" value="{{old('name')}}" name="name" required placeholder="First Name">
-        
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Last Name <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" value="{{old('last_name')}}" name="last_name" required placeholder="Last Name">
-        
-                        </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="number">Admission Number <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" value="{{old('admission_number')}}" name="admission_number" required placeholder="Admission Number">
-        
-                        </div></div>
-                        <div class="form-group col-md-6">
-                            <label for="number">Roll Number <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" value="{{old('roll_number')}}" name="roll_number" required placeholder="RollNumber">
-        
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Class <span style="color: red;">*</span></label>
-                            <select class="form-control" required name="class_id">
-                                <option value="">Select Class</option>
-                            <input type="text" class="form-control" name="roll_number" required>
-        
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" name="email" required>
-            
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="number">Mobile</label>
-                            <input type="number" class="form-control" name="number" required>
-                
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" required>
-                
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block" name="Submit">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    -->
-    <!-- Include Bootstrap JS and jQuery from a CDN -->
-    <!--
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>-->
+
 
         
 

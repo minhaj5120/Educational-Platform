@@ -60,14 +60,33 @@ class User extends Authenticatable
         ->get();
     }
     static public function getStudent(){
-        return self::select('users.*')
+        return self::select('users.*','class.name as class_name')
+        ->join('class','class.id','=','users.class_id')
         ->where('category', '=',2)
-        ->where('is_deleted','=',0)
-        ->orderBy('id','desc')
+        ->where('users.is_deleted','=',0)
+        ->orderBy('id','asc')
         ->get();
     }
     static public function getSingle($id){
         return self::find($id);
     }
+    public function getProfile(){
+        if(!empty($this->profile_pic) && file_exists('upload/profile/'.$this->profile_pic)){
+            return(url('upload/profile/'.$this->profile_pic));
+        }
+        else{
+            return "";
+        }
+    }
+    static public function getTeacherStudent( $teacher_id ){
+        return self::select('users.*','class.name as class_name')
+        ->join('class','class.id','=','users.class_id')
+        ->join('class_teacher','class_teacher.class_id','=','class.id')
+        ->where('class_teacher.teacher_id','=', $teacher_id)
+        ->where('category', '=',2)
+        ->orderBy('id','desc')
+        ->get();
+    }
+
 
 }

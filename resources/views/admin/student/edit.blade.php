@@ -43,6 +43,7 @@
                             <input type="number" class="form-control" name="number"value="{{$getRecord->number}}" required>
                 
                         </div>
+                        
                         <button type="submit" class="btn btn-primary btn-block" name="Submit">Submit</button>
                     </form>
                 </div>

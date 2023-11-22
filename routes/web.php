@@ -10,6 +10,8 @@ use App\Http\Controllers\ClassSubjectController;
 use App\Http\Controllers\AdminTeacherController;
 use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\ClassTeacherController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClassTimeController;
 
 
 
@@ -140,14 +142,33 @@ Route::group(['middleware' => 'Admin'], function () {
     Route::get('admin/assign_class_teacher/delete/{id}', [ClassTeacherController::class, 'delete']);
     Route::get('admin/assign_class_teacher/search', [ClassTeacherController::class, 'search']);
 
+    //class_time
+    Route::get('admin/class_time/list', [ClassTimeController::class, 'list']);
+    Route::post('admin/class_time/get_subject', [ClassTimeController::class, 'get_subject']);
+    Route::post('admin/class_time/add', [ClassTimeController::class, 'insert_update']);
+
+    //change_password
+    Route::get('admin/change_password', [UserController::class, 'change_password']);
+    Route::post('admin/change_password', [UserController::class, 'update_change_password']);
+
 });
 Route::group(['middleware' => 'Teacher'], function () {
     Route::get('teacher/dashboard', [DashboardController::class, 'dashboard1'])->name('teacher.dashboard');
     // Route::get('admin/admin/list', [AdminController::class, 'list']);
+    //change_password
+    Route::get('teacher/change_password', [UserController::class, 'change_password']);
+    Route::post('teacher/change_password', [UserController::class, 'update_change_password']);
+    Route::get('teacher/my_class_subject', [ClassTeacherController::class, 'my_class_subject']);
+    Route::get('teacher/my_student', [AdminStudentController::class, 'my_student']);
+    Route::get('teacher/my_class_subject/class_time/{class_id}/{subject_id}', [ClassTimeController::class, 'teacher_class_time']);
 
 });
 Route::group(['middleware' => 'Student'], function () {
     Route::get('student/dashboard', [DashboardController::class, 'dashboard1'])->name('student.dashboard');
+
+    //change_password
+    Route::get('student/change_password', [UserController::class, 'change_password']);
+    Route::post('student/change_password', [UserController::class, 'update_change_password']);
 });
 
 
