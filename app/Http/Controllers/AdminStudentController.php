@@ -17,12 +17,11 @@ class AdminStudentController extends Controller
         return view("admin.student.list", $data);
     }
     public function add(){
-        $data['header_title'] = "Add New student";
+        $data["classes"] = ClassModel::getClassStudent();
+        $data['header_title'] = "Add New Student";
         return view("admin.student.add", $data);
     }
     public function insert(Request $request){
-        
-
         $user = new User();
         $user->name = trim($request->name);
         $user->last_name = trim($request->last_name);
@@ -33,30 +32,33 @@ class AdminStudentController extends Controller
         $user->roll_number = trim($request->roll_number);
         $user->class_id = trim($request->class_id);
         $user->gender = trim($request->gender);
-        if(!empty($request->file('profile_pic')));
-        {
-            $ext = $request-.file('profile_pic')->getClientOriginalExtension();
-            $file = $request-.file('profile_pic');
-            $randomStr = Str::random(20);
-            $filename = strtolower($randomStr).'.'.$ext;
-            $file->move('upload/profile/',$$filename);
+    
+        if (!empty($request->file('profile_pic'))) {
+            $ext = $request->file('profile_pic')->getClientOriginalExtension();
+            $file = $request->file('profile_pic');
+            $randomStr =date('Ymdhis'). Str::random(30);
+            $filename = strtolower($randomStr) . '.' . $ext;
+            $file->move('upload/profile/', $filename);
             $user->profile_pic = $filename;
         }
+    
         $user->religion = trim($request->religion);
         $user->admission_date = trim($request->admission_date);
-        if(!empty($request->date_of_birth));
-        {
+    
+        if (!empty($request->date_of_birth)) {
             $user->date_of_birth = trim($request->date_of_birth);
         }
-
+    
         $user->blood_group = trim($request->blood_group);
         $user->height = trim($request->height);
         $user->weight = trim($request->weight);
         $categoryValue = 2;
         $user->category = $categoryValue;
         $user->save();
-        return redirect("admin/student/list")->with("success","New Student Added Successfully");
+    
+        return redirect("admin/student/list")->with("success", "New Student Added Successfully");
     }
+    
     public function edit($id){
         
         $data['getRecord']=User::getSingle($id);
@@ -96,5 +98,12 @@ class AdminStudentController extends Controller
     $data['getRecord'] = User::where('name', 'like', '%' . $search . '%')->get();
 
     return view('admin/student/list',$data);
+    }
+
+    //teacher side
+    public function my_student(){
+        $data['header_title'] = "Student List";
+        $data['getRecord']=User::getTeacherStudent(Auth::user()->id);
+        return view("admin.student.list", $data);
     }
 }

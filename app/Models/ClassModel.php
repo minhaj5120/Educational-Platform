@@ -22,11 +22,19 @@ class ClassModel extends Model
     }
     static public function getClasses(){
         return self::select('class.*')
-        // ->join('users','users.id','class.created_by')
+        ->join('users','users.id','class.created_by')
         ->where('class.status', '=',0)
         ->where('class.is_deleted','=',0)
         
-        ->orderBy('class.name','asc')
+        ->orderBy('class.id','asc')
+        ->get();
+    }
+    public static function getClassStudent()
+    {
+        return self::select('class.*')
+        ->where('class.status', '=',0)
+        ->where('class.is_deleted','=',0)
+        ->orderBy('class.id','asc')
         ->get();
     }
 
