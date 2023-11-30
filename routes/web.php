@@ -12,6 +12,8 @@ use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\ClassTeacherController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClassTimeController;
+use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\TeacherCalendarController;
 
 
 
@@ -161,6 +163,8 @@ Route::group(['middleware' => 'Teacher'], function () {
     Route::get('teacher/my_class_subject', [ClassTeacherController::class, 'my_class_subject']);
     Route::get('teacher/my_student', [AdminStudentController::class, 'my_student']);
     Route::get('teacher/my_class_subject/class_time/{class_id}/{subject_id}', [ClassTimeController::class, 'teacher_class_time']);
+    Route::get('teacher/my_calendar', [TeacherCalendarController::class, 'MyCalendarTeacher']);
+
 
 });
 Route::group(['middleware' => 'Student'], function () {
@@ -169,6 +173,10 @@ Route::group(['middleware' => 'Student'], function () {
     //change_password
     Route::get('student/change_password', [UserController::class, 'change_password']);
     Route::post('student/change_password', [UserController::class, 'update_change_password']);
+    Route::get('student/my_timetable', [ClassTimeController::class, 'MyTimetable']);
+
+    Route::get('student/my_calendar', [CalendarController::class, 'MyCalendar']);
+
 });
 
 
