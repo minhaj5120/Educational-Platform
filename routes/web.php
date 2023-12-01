@@ -13,10 +13,11 @@ use App\Http\Controllers\ClassTeacherController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClassTimeController;
 use App\Http\Controllers\FeesCollectionController;
-
-
+use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\TeacherCalendarController;
+use App\Http\Controllers\AttendanceController;
+
 
 
 
@@ -121,6 +122,19 @@ Route::group(['middleware' => 'Admin'], function () {
     Route::get('admin/fees_collection/collect_fees', [FeesCollectionController::class, 'collect_fees']);
     Route::get('admin/fees_collection/add_fees/{student_id}', [FeesCollectionController::class, 'add_fees']);
     Route::post('admin/fees_collection/add_fees/{student_id}', [FeesCollectionController::class, 'add_fees_insert']);
+
+    //exam
+    Route::get('admin/examinations/exam/list', [ExaminationsController::class, 'exam_list']);
+    Route::get('admin/examinations/exam/add', [ExaminationsController::class, 'exam_add']);
+    Route::post('admin/examinations/exam/add', [ExaminationsController::class, 'exam_insert']);
+    Route::get('admin/examinations/exam/edit/{id}', [ExaminationsController::class, 'exam_edit']);
+    Route::post('admin/examinations/exam/edit/{id}', [ExaminationsController::class, 'exam_update']);
+    Route::get('admin/examinations/exam/delete/{id}', [ExaminationsController::class, 'exam_delete']);
+    Route::get('admin/examinations/exam_schedule', [ExaminationsController::class, 'exam_schedule']);
+
+    //attendance
+    Route::get('admin/attendance/student', [AttendanceController::class, 'student_attendance']);
+    
 
     //change_password
     Route::get('admin/change_password', [UserController::class, 'change_password']);
