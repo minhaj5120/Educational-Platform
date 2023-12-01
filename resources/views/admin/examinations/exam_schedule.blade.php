@@ -95,25 +95,25 @@
                                     @foreach($getRecord as $value)
                                     <tr>
                                         <td>{{ $value['subject_name'] }}
-                                            <input type="hidden" class="form-control" value="{{ $value['subject_id'] }}" name="schedule[{{$i}}][subject_id]">
+                                            <input type="hidden" class="form-control" value="{{ $value['subject_id'] }}" name="schedule[{{ $i }}][subject_id]">
                                         </td>
                                         <td>
-                                            <input type="date" class="form-control" name="schedule[{{$i}}][exam_date]">
+                                            <input type="date" class="form-control" value="{{ $value['exam_date'] }}" name="schedule[{{ $i }}][exam_date]">
                                         </td>
                                         <td>
-                                            <input type="time" class="form-control" name="schedule[{{$i}}][start_time">
+                                            <input type="time" class="form-control" value="{{ $value['start_time'] }}" name="schedule[{{ $i }}][start_time]">
                                         </td>
                                         <td>
-                                            <input type="time" class="form-control" name="schedule[{{$i}}][end_time]">
+                                            <input type="time" class="form-control" value="{{ $value['end_time'] }}" name="schedule[{{ $i }}][end_time]">
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" name="schedule[{{$i}}][room_number]">
+                                            <input type="text" class="form-control" value="{{ $value['room_number'] }}" name="schedule[{{ $i }}][room_number]">
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" name="schedule[{{$i}}][full_marks]">
+                                            <input type="text" class="form-control" value="{{ $value['full_marks'] }}" name="schedule[{{ $i }}][full_marks]">
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" name="schedule[{{$i}}][passing_marks]"> 
+                                            <input type="text" class="form-control" value="{{ $value['passing_marks'] }}" name="schedule[{{ $i }}][passing_marks]"> 
                                         </td>
                                     </tr>
                                     @php
