@@ -50,6 +50,7 @@
                                     <tr>
                                         <th style="width: 10px">#</th>
                                         <th>Name</th>
+                                        <th>Amount</th>
                                         <th>Created at</th>
                                         <th>Created by</th>
                                         <th>Status</th>
@@ -61,6 +62,7 @@
                                     <tr>
                                         <td>{{ $key->id }}</td>
                                         <td>{{ $key->name }}</td>
+                                        <td>${{ number_format($key->amount,2 )}}</td>
                                         <td>{{ $key->created_at }}</td>
                                         <td>{{ $key->created_by_name }}</td>
                                         <td>

@@ -29,4 +29,13 @@ class SubjectModel extends Model
         ->orderBy('subject.name','asc')
         ->get();
     }
+    static public function getTotalSubject()
+    {
+        $return = SubjectModel::select('subject.id')
+            ->where('subject.status', '=',0)
+            ->where('subject.is_deleted','=',0)
+            ->count();
+        return $return;
+
+    }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Class</title>
+    <title>Edit Details</title>
     <!-- Include Bootstrap CSS from a CDN -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -25,25 +25,20 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-container">
-                    <h1 class="text-center">Assign New Class</h1>
+                    <h1 class="text-center">Settings</h1>
                     <form action="" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="name">Class Name</label>
-                            <input type="text" class="form-control" name="name" required>
+                            <label>STRIPE PUBLIC KEY</label>
+                            <input type="text" class="form-control" name="stripe_key" required>
+            
                         </div>
                         <div class="form-group">
-                            <label for="amount">Amount ($)</label>
-                            <input type="number" class="form-control" name="amount" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="text">Status</label>
-                            <select class="form-control" name="status" required>
-                                <option value="0">Active</option>
-                                <option value="1">Inactive</option>
-                            </select>
+                            <label>STRIPE SECRET KEY</label>
+                            <input type="text" class="form-control" name="stripe_secret" required>
                 
                         </div>
+                        
                         <button type="submit" class="btn btn-primary btn-block" name="Submit">Submit</button>
                     </form>
                 </div>

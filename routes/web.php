@@ -12,7 +12,15 @@ use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\ClassTeacherController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClassTimeController;
+
 use App\Http\Controllers\ExaminationsController;
+
+use App\Http\Controllers\FeesCollectionController;
+
+
+use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\TeacherCalendarController;
+
 
 
 
@@ -28,35 +36,6 @@ use App\Http\Controllers\ExaminationsController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Route::get('admin/dashboard', [DashboardController::class, 'dashboard1'])->name('admin.dashboard');
-// // Route::get('admin/dashboard', [AuthController::class, 'Authlogin']);
-// // Route::get('admin/admin/dashboard', [DashboardController::class, 'dashboard1']) ->middleware('isloggedin')->name('admin/admin/dashboard');
-// Route::get('teacher/dashboard', [DashboardController::class, 'dashboard1'])->name('teacher.dashboard');
-// Route::get('student/dashboard', [DashboardController::class, 'dashboard1'])->name('student.dashboard');
-// Route::get('admin/dashboard', function () {
-//     return view('admin.dashboard');
-// })->middleware('isloggedin');
-// Route::get('layout/header', function () {
-//     return view('admin.dashboard');
-// })->middleware('isloggedin');
-// Route::get('admin/admin/list', function () {
-//     return view('admin.admin.list');
-// })->middleware('isloggedin');
-// Route::get('admin/admin/dashboard', function () {
-//     return view('admin.admin.dashboard');
-// })->middleware('isloggedin');
-// Route::get('student/student/dashboard', function () {
-//     return view('student.student.dashboard');
-// })->middleware('isloggedin');
-// Route::get('student/list', function () {
-//     return view('student.list');
-// })->middleware('isloggedin');
-// Route::get('teacher/list', function () {
-//     return view('teacher.list');
-// })->middleware('isloggedin');
-// Route::get('teacher/dashboard', function () {
-//     return view('teacher.dashboard');
-// })->middleware('isloggedin');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 
@@ -66,13 +45,6 @@ Route::get('/registration', [AuthController::class, 'registration']);
 Route::post('/registerUser', [AuthController::class, 'registerUser'])->name('registerUser');
 Route::get('/logout', [AuthController::class, 'logout']);
 
-
-// Route::group(['middleware' => 'Admin'], function () {
-//     Route::get('admin/dashboard', [DashboardController::class, 'dashboard1'])->name('admin.dashboard');
-// });
-// // Route::group(['middleware' => 'Admin'], function () {
-// //     Route::get('admin/dashboard', [DashboardController::class, 'dashboard1']);
-// // });
 Route::group(['middleware' => 'Admin'], function () {
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard1'])->name('admin.dashboard');
     Route::get('admin/admin/dashboard', [DashboardController::class, 'dashboard1']);
@@ -147,9 +119,15 @@ Route::group(['middleware' => 'Admin'], function () {
     Route::post('admin/class_time/get_subject', [ClassTimeController::class, 'get_subject']);
     Route::post('admin/class_time/add', [ClassTimeController::class, 'insert_update']);
 
+    //fees_collection
+    Route::get('admin/fees_collection/collect_fees', [FeesCollectionController::class, 'collect_fees']);
+    Route::get('admin/fees_collection/add_fees/{student_id}', [FeesCollectionController::class, 'add_fees']);
+    Route::post('admin/fees_collection/add_fees/{student_id}', [FeesCollectionController::class, 'add_fees_insert']);
+
     //change_password
     Route::get('admin/change_password', [UserController::class, 'change_password']);
     Route::post('admin/change_password', [UserController::class, 'update_change_password']);
+
 
     Route::get('admin/examinations/exam/list', [ExaminationsController::class, 'exam_list']);
     Route::get('admin/examinations/exam/add', [ExaminationsController::class, 'exam_add']);
@@ -163,6 +141,11 @@ Route::group(['middleware' => 'Admin'], function () {
 
     
 
+    //settins
+    Route::get('admin/settings', [UserController::class, 'settings']);
+    Route::post('admin/settings', [UserController::class, 'settings_insert']);
+
+
 });
 Route::group(['middleware' => 'Teacher'], function () {
     Route::get('teacher/dashboard', [DashboardController::class, 'dashboard1'])->name('teacher.dashboard');
@@ -173,6 +156,8 @@ Route::group(['middleware' => 'Teacher'], function () {
     Route::get('teacher/my_class_subject', [ClassTeacherController::class, 'my_class_subject']);
     Route::get('teacher/my_student', [AdminStudentController::class, 'my_student']);
     Route::get('teacher/my_class_subject/class_time/{class_id}/{subject_id}', [ClassTimeController::class, 'teacher_class_time']);
+    Route::get('teacher/my_calendar', [TeacherCalendarController::class, 'MyCalendarTeacher']);
+
 
 });
 Route::group(['middleware' => 'Student'], function () {
@@ -181,6 +166,16 @@ Route::group(['middleware' => 'Student'], function () {
     //change_password
     Route::get('student/change_password', [UserController::class, 'change_password']);
     Route::post('student/change_password', [UserController::class, 'update_change_password']);
+
+    //fees_collection
+    Route::get('student/fees_collection', [FeesCollectionController::class, 'student_collect_fees']);
+    Route::post('student/fees_collection', [FeesCollectionController::class, 'student_collect_fees_payment']);
+    
+
+    Route::get('student/my_timetable', [ClassTimeController::class, 'MyTimetable']);
+
+    Route::get('student/my_calendar', [CalendarController::class, 'MyCalendar']);
+
 });
 
 

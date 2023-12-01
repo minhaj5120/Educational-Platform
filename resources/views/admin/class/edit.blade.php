@@ -34,6 +34,11 @@
         
                         </div>
                         <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <input type="number" class="form-control" name="amount" value="{{$getRecord->amount}}"required>
+        
+                        </div>
+                        <div class="form-group">
                             <label for="status">Status</label>
                             <input type="status" class="form-control" name="status"value="{{ $getRecord->status == 0 ? 'Active' : 'Inactive' }}" required>
             

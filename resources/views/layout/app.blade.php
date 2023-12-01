@@ -83,5 +83,6 @@
 <script src="{{url('public/dist/js/pages/dashboard.js')}}"></script>
 
 @yield('script')
+@yield('style')
 </body>
 </html>
