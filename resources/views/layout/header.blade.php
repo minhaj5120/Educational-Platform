@@ -52,6 +52,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{url('admin/payment/list')}}" class="nav-link @if(Request::segment(2)=='payment') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Payment
+              </p>
+            </a>
+          </li>
           <li class="nav-item @if(Request::segment(2)=='class' || Request::segment(2)=='subject' || Request::segment(2)=='assign_subject' || Request::segment(2)=='assign_class_teacher' || Request::segment(2)=='class_time') menu-is-opening menu-open @endif">
             <a href="#" class="nav-link @if(Request::segment(2)=='class' || Request::segment(2)=='subject' || Request::segment(2)=='assign_subject' || Request::segment(2)=='assign_class_teacher' || Request::segment(2)=='class_time') active @endif">
               <i class="nav-icon fas fa-table"></i>
@@ -145,6 +153,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{url('student/my_calendar')}}" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                My Calendar
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{url('student/my_class_subject')}}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
               <p>
@@ -163,6 +179,8 @@
           <li class="nav-item">
             <a href="{{url('student/list')}}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
+            <a href="{{url('student/my_timetable')}}" class="nav-link @if(Request::segment(2)=='my_timetable') active @endif">
+             <i class="nav-icon far fa-user"></i>
               <p>
                 My Timetable
               </p>
@@ -196,13 +214,21 @@
             <a href="{{url('student/list')}}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
               <p>
-                Student
+                My Exam Timetable
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('student/my_account')}}" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                My Account
               </p>
             </a>
           </li>
           <li class="nav-item">
                 <a href="{{url('student/change_password')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="nav-icon far fa-user"></i>
                   <p>Change Password</p>
                 </a>
           </li>
@@ -212,6 +238,14 @@
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('teacher/my_calendar')}}" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                My Calendar
               </p>
             </a>
           </li>
@@ -259,7 +293,7 @@
             <a href="{{url('teacher/list')}}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
               <p>
-                Homework
+                 Homework
               </p>
             </a>
           </li>
@@ -271,14 +305,14 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+      <!--  <li class="nav-item">
             <a href="{{url('teacher/list')}}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
               <p>
                 Send email to students
               </p>
             </a>
-          </li>
+          </li>  -->  
           <li class="nav-item">
             <a href="{{url('teacher/list')}}" class="nav-link">
               <i class="nav-icon far fa-user"></i>

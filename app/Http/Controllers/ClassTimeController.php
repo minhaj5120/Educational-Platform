@@ -8,6 +8,7 @@ use App\Models\SubjectModel;
 use App\Models\ClassSubjectModel;
 use App\Models\WeekModel;
 use App\Models\ClassTimeModel;
+use Auth;
 class ClassTimeController extends Controller
 {
     public function list(Request $request){
@@ -111,5 +112,39 @@ class ClassTimeController extends Controller
         $data['header_title'] = "Class Time";
         return view("teacher.class_time",$data);
 
+    }
+    public function MyTimetable()
+    {
+        $getWeek=WeekModel::getRecord();
+        $week=array();
+        foreach($getWeek as $value){
+            $dataW=array(); 
+            $dataW['week_id']= $value->id;
+            $dataW['week_name']= $value->name;
+            
+            if(!empty($request->class_id) && !empty($request->subject_id)){
+                $classsubject=ClassTimeModel::getRecordClassTime( $request->class_id, $request->subject_id,$value->id);
+                if(!empty($classsubject)){
+                    $dataW['start_time']= $classsubject->start_time;
+                    $dataW['end_time']= $classsubject->end_time;
+                    $dataW['room_number']= $classsubject->room_number;
+                }
+                else{
+                    $dataW['start_time']= "";
+                    $dataW['end_time']="";
+                    $dataW['room_number']= "";
+                }
+            }
+            else{
+                $dataW['start_time']= "";
+                $dataW['end_time']="";
+                $dataW['room_number']="";
+            }
+            $week[] = $dataW;
+        }
+        $data['week'] = $week;
+        $data['getRecord'] = ClassSubjectModel::Myclasssubject(Auth::user()->class_id);
+        $data['header_title'] = "My Timetable";
+        return view("student.student.my_timetable", $data); 
     }
 }

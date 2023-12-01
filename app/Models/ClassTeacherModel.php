@@ -39,13 +39,33 @@ class ClassTeacherModel extends Model
         return self::where("class_id","=",$class_id)
         ->where("teacher_id","=", $classteacher_id)->first();
     }
+
+    static public function getClassSubjectCount($teacher_id){
+        return self::select("class_teacher.id")
+            ->join("class", "class.id", "=", "class_teacher.class_id")
+            ->join("class_subject","class_subject.class_id","=", "class.id")
+            ->join("subject","subject.id","=", "class_subject.subject_id")
+            ->where("class_teacher.teacher_id","=", $teacher_id)
+            ->where("class_teacher.status", "=", 0) 
+            ->orderBy("class_teacher.id", "desc")
+            ->count();
+    }
+    static public function getMyClassSubjectGroupCount($teacher_id){
+        return ClassTeacherModel::select('class_teacher.id')
+            ->join("class", "class.id", "=", "class_teacher.class_id")
+            ->where("class_teacher.is_deleted", "=", 0) 
+            ->where("class_teacher.status", "=", 0) 
+            ->where("class_teacher.teacher_id","=", $teacher_id)
+            ->count();
+    }
+
     static public function getClassSubject($teacher_id){
         return self::select("class_teacher.*", 'class.name as class_name','subject.name as subject_name','subject.type as subject_type', 'class.id as class_id', 'subject.id as subject_id' )
             ->join("class", "class.id", "=", "class_teacher.class_id")
             ->join("class_subject","class_subject.class_id","=", "class.id")
             ->join("subject","subject.id","=", "class_subject.subject_id")
             ->where("class_teacher.teacher_id","=", $teacher_id)
-            ->where("class_teacher.status", "=", 0) // Filter by teacher category
+            ->where("class_teacher.status", "=", 0) 
             ->orderBy("class_teacher.id", "desc")
             ->get();
     
@@ -57,4 +77,18 @@ class ClassTeacherModel extends Model
         // ->orderBy('id','desc')
         // ->get();
     }
+    static public function getCalendarTeacher($teacher_id)
+    {
+        return ClassTeacherModel::select('class_time.*','class.name as class_name','subject.name as subject_name','week.name as week_name','week.fullcalendar_day')
+            ->join("class", "class.id", "=", "class_teacher.class_id")
+            ->join("class_subject", "class_subject.class_id", "=", "class.id")
+            ->join("class_time", "class_time.subject_id", "=", "class_subject.subject_id")
+            ->join("subject", "subject.id", "=", "class_time.subject_id")
+            ->join("week", "week.id", "=", "class_time.week_id")
+            ->where('class_teacher.teacher_id','=',$teacher_id)
+            ->where("class_teacher.status", "=", 0) 
+            ->where("class_teacher.is_deleted", "=", 0) 
+            ->get();
+    }
+
 }

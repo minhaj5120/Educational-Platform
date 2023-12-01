@@ -15,6 +15,10 @@ use App\Http\Controllers\ClassTimeController;
 use App\Http\Controllers\FeesCollectionController;
 
 
+use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\TeacherCalendarController;
+
+
 
 
 
@@ -137,6 +141,8 @@ Route::group(['middleware' => 'Teacher'], function () {
     Route::get('teacher/my_class_subject', [ClassTeacherController::class, 'my_class_subject']);
     Route::get('teacher/my_student', [AdminStudentController::class, 'my_student']);
     Route::get('teacher/my_class_subject/class_time/{class_id}/{subject_id}', [ClassTimeController::class, 'teacher_class_time']);
+    Route::get('teacher/my_calendar', [TeacherCalendarController::class, 'MyCalendarTeacher']);
+
 
 });
 Route::group(['middleware' => 'Student'], function () {
@@ -145,10 +151,16 @@ Route::group(['middleware' => 'Student'], function () {
     //change_password
     Route::get('student/change_password', [UserController::class, 'change_password']);
     Route::post('student/change_password', [UserController::class, 'update_change_password']);
+
     //fees_collection
     Route::get('student/fees_collection', [FeesCollectionController::class, 'student_collect_fees']);
     Route::post('student/fees_collection', [FeesCollectionController::class, 'student_collect_fees_payment']);
     
+
+    Route::get('student/my_timetable', [ClassTimeController::class, 'MyTimetable']);
+
+    Route::get('student/my_calendar', [CalendarController::class, 'MyCalendar']);
+
 });
 
 

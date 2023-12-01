@@ -124,5 +124,21 @@ class User extends Authenticatable
         return AddFeesModel::getPaidAmount( $student_id, $class_id );
     }
 
+    static public function getTeacherStudentCount( $teacher_id ){
+        return self::select('users.id')
+        ->join('class','class.id','=','users.class_id')
+        ->join('class_teacher','class_teacher.class_id','=','class.id')
+        ->where('class_teacher.teacher_id','=', $teacher_id)
+        ->where('category', '=',2)
+        ->orderBy('id','desc')
+        ->count();
+    }
+    static public function getTotalUser($category)
+    {
+        return self::select('users.id')
+            ->where('category','=',$category)
+            ->where('is_deleted','=',0)
+            ->count();
 
+    }
 }
