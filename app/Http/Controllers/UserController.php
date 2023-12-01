@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\SettingsModel;
 use Auth;
 use Hash;
 
@@ -25,4 +26,18 @@ class UserController extends Controller
         }
         
     }
+    public function settings(Request $request){
+        $data['header_title'] = "Settings";
+        return view("admin.settings", $data);
+    }
+    public function settings_insert(Request $request){
+        $settings=new SettingsModel();
+        $settings->stripe_key=trim($request->stripe_key);
+        $settings->stripe_secret=trim($request->stripe_secret);
+        $settings->save();
+        return redirect("admin/dashboard")->with("success","Inserted Successfully");
+
+    }
+
+    
 }

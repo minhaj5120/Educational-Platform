@@ -103,6 +103,31 @@
           </li>
             </ul>
           </li>
+          <li class="nav-item @if(Request::segment(2)=='fees_collection') menu-is-opening menu-open @endif">
+            <a href="#" class="nav-link @if(Request::segment(2)=='fees_collection') active @endif">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Fees Collection
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+            <li class="nav-item">
+            <a href="{{url('admin/fees_collection/collect_fees')}}" class="nav-link @if(Request::segment(3)=='collect_fees') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Collect Fees
+              </p>
+            </a>
+            </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+                <a href="{{url('admin/settings')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>My Settings</p>
+                </a>
+          </li>
 
           <li class="nav-item">
                 <a href="{{url('admin/change_password')}}" class="nav-link">
@@ -116,6 +141,54 @@
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('student/my_class_subject')}}" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                My Subject
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('student/fees_collection')}}" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Fees Collection
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('student/list')}}" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                My Timetable
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('student/list')}}" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                My Exam Timetable
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('student/list')}}" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                My Exam Result
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('student/list')}}" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                My Attendance
               </p>
             </a>
           </li>

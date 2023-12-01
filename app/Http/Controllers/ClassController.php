@@ -22,6 +22,7 @@ class ClassController extends Controller
 
         $class = new ClassModel();
         $class->name = trim($request->name);
+        $class->amount = trim($request->amount);
         $class->status = trim($request->status);
         $class->created_by = Auth::user()->id;
         $class->save();
@@ -52,6 +53,7 @@ class ClassController extends Controller
     public function update($id,Request $request){
         $user = ClassModel::getSingle($id);
         $user->name = trim($request->name);
+        $user->amount = trim($request->amount);
         $user->status = $request->status == 'Active' ? 0 : 1;
         $user->save();
         return redirect("admin/class/list")->with("success","Class Updateed Successfully");

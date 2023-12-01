@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'number',
+        'google_id',
     ];
 
     /**
@@ -65,10 +66,16 @@ class User extends Authenticatable
         ->where('category', '=',2)
         ->where('users.is_deleted','=',0)
         ->orderBy('id','asc')
-        ->get();
+        ->paginate(50);
     }
     static public function getSingle($id){
         return self::find($id);
+    }
+    static public function getSingleClass($id){
+        return self::select('users.*','class.amount','class.name as class_name')
+        ->join('class','class.id','=','users.class_id')
+        ->where('users.id','=',$id)
+        ->first();
     }
     public function getProfile(){
         if(!empty($this->profile_pic) && file_exists('upload/profile/'.$this->profile_pic)){
@@ -86,6 +93,35 @@ class User extends Authenticatable
         ->where('category', '=',2)
         ->orderBy('id','desc')
         ->get();
+    }
+    static public function CollectFees(){
+        // Start building the query
+        $query = self::select('users.*', 'class.name as class_name', 'class.amount')
+            ->join('class', 'class.id', '=', 'users.class_id')
+            ->where('category', '=', 2)
+            ->where('users.is_deleted', '=', 0);
+    
+        // Check if class_id is present in the request
+        if (!empty(request()->get('class_id'))) {
+            $query->where('users.class_id', '=', request()->get('class_id'));
+        }
+        if (!empty(request()->get('student_id'))) {
+            $query->where('users.id', '=', request()->get('student_id'));
+        }
+        if (!empty(request()->get('first_name'))) {
+            $query->where('users.name', 'like', '%' . request()->get('first_name') . '%');
+
+        }
+
+    
+        // Continue building the query
+        $result = $query->orderBy('users.name', 'asc')
+            ->paginate(50);
+    
+        return $result;
+    }
+    static public function getPaidAmount($student_id,$class_id){
+        return AddFeesModel::getPaidAmount( $student_id, $class_id );
     }
 
 
