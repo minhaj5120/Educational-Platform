@@ -7,50 +7,61 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-md-12 text-center">
-              <h1 style="font-weight: bold;">My Timetable</h1>  
+                <h1 style="font-weight: bold;">My Subject List</h1>
             </div>
-        </div> 
+        </div>
     </div><!-- /.container-fluid -->
     </section>
     <!-- Content Header (Page header) -->
+
+    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-        <div class="row">    
+            <div class="row">
+
+                <!-- /.col -->
                 <div class="col-md-12">
-                    @foreach($getRecord as $value)
-                        <div class="card">
+
+                    <!-- /.card -->
+
+                    <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title" style="font-weight:bold">{{$value['subject_name']}}</h4>
+                            <h3 style="font-weight: bold; text-align: Center;">All Subjects</h3>
                         </div>
+                        <!-- /.card-header -->
                         <div class="card-body p-0">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Week Days</th>
-                                        <th>Start Time</th>
-                                        <th>End Time</th>
-                                        <th>Room Number</th>
-                                    </tr>
-                                </thead>    
-                                <tbody>
-                                    @foreach($value['week'] as $key)
-                                    <tr>
-                                        <td>{{$key['week_name']}}</td>
-                                        <td>{{$key['start_time']}}</td>
-                                        <td>{{$key['end_time']}}</td>
-                                        <td>{{$key['room_number']}}</td>
+                                        <th>Subject Name</th>>
+                                        <th>Subject Type</th>
 
+                                    </tr>
+                                    <tbody>
+                                    @foreach($getRecord as $key)
+                                    <tr>
+                                        <td>{{ $key->subject_name }}</td>
+                                        <td>{{ $key->type }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
+
                             </table>
                         </div>
-                    @endforeach
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+
+        </div>
+
     </section>
-
-    <!-- Main content -->
-
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 @endsection
+
+
+

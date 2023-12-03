@@ -66,7 +66,7 @@
                 <div class="col-lg-3 co-6">
                     <div class='small-box bg-danger'>
                         <div class='inner'>
-                            <h3>---</h3>
+                            <h3>${{ number_format($TotalPayment,2 )}}</h3>
                             <h2>Total Payment</h2>
                         </div>            
                         <div class="icon">            

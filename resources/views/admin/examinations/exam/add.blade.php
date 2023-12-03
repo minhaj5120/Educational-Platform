@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assign New Class Teacher</title>
+    <title>Add New Exam</title>
     <!-- Include Bootstrap CSS from a CDN -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -25,40 +25,20 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-container">
-                    <h1 class="text-center">Assign New Class Teacher</h1>
+                    <h1 class="text-center">Add New Exam</h1>
                     <form action="" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="class_name">Class Name</label>
-                            <select class="form-control" name="class_name" required>
-                                <option value="0">Select Class</option>
-                                @foreach($getClasses as $class)
-                                    <option value="{{$class->id}}">{{$class->name}}</option>
-                                @endforeach
-                            </select>
-        
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Teacher Name</label>
-                                @foreach($getTeacher as $classteacher)
-                                <div>
-                                    <label>
-                                        <input type ="checkbox"value="{{$classteacher->id}}" name="classteacher_id[]">{{$classteacher->name}}
-                                    </lebel>
-                                </div>
-                                @endforeach
-        
-                        </div>
-                        
+                            <label for="name">Exam Name</label>
+                            <input type="text" class="form-control" name="name" required placeholder="Exam Name">
 
-                        <div class="form-group">
-                            <label for="text">Status</label>
-                            <select class="form-control" name="status" required>
-                                <option value="0">Active</option>
-                                <option value="1">Inactive</option>
-                            </select>
-                
                         </div>
+                        <div class="form-group">
+                            <label>Note</label>
+                            <textarea class="form-control" name="note" placeholder="Note"></textarea>
+
+                        </div>
+
                         <button type="submit" class="btn btn-primary btn-block" name="Submit">Submit</button>
                     </form>
                 </div>
@@ -72,8 +52,3 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-        
-
-
-

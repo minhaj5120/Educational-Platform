@@ -9,6 +9,7 @@ class ClassModel extends Model
 {
     use HasFactory;
     protected $table = "class";
+    
     static public function getClass(){
         return self::select('class.*','users.name as created_by_name')
         ->join('users','users.id','class.created_by')
@@ -37,7 +38,6 @@ class ClassModel extends Model
         ->orderBy('class.id','asc')
         ->get();
     }
-
     static public function getTotalClass(){
         $return = ClassModel::select('class.id')
             ->where('class.status', '=',0)
