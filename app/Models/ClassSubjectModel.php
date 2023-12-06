@@ -44,4 +44,14 @@ class ClassSubjectModel extends Model
     static public function getSingle($id){
         return self::find($id);
     }
+    static public function MySubject($class_id){
+        return self::select("class_subject.*",'class.name as class_name','subject.name as subject_name','subject.type as type')
+                    ->join("subject","subject.id","=","class_subject.subject_id")
+                    ->join("class","class.id","=","class_subject.class_id")
+                    ->where("class_subject.status","=", 0)
+                    ->where("class_subject.class_id","=", $class_id)
+                    ->orderBy("class_subject.id","desc")
+                    ->get();    
+
+    }
 }

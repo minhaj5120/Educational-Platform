@@ -141,4 +141,17 @@ class User extends Authenticatable
             ->count();
 
     }
+    static public function getStudentClass($class_id){
+        return self::select('users.id','users.name','users.last_name')
+        ->where('users.class_id','=',$class_id)
+        ->where('category', '=',2)
+        ->where('users.is_deleted','=',0)
+        ->orderBy('users.id','asc')
+        ->get();
+    }
+    static public function getAttendance($student_id,$class_id,$date){
+        return StudentAttendanceModel::checkAttendance($student_id,$class_id,$date);
+    }
+    
+
 }

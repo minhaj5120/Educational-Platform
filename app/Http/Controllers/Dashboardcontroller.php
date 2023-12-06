@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\ClassModel;
 use App\Models\SubjectModel;
 use App\Models\ClassTeacherModel;
+use App\Models\AddFeesModel;
 
 
 class DashboardController extends Controller
@@ -24,7 +25,9 @@ class DashboardController extends Controller
                 $data['TotalTeacher'] = User::getTotalUser(3);    
                 $data['TotalStudent'] = User::getTotalUser(2);    
                 $data['TotalClass'] = ClassModel::getTotalClass();    
-                $data['TotalSubject'] = SubjectModel::getTotalSubject();    
+                $data['TotalSubject'] = SubjectModel::getTotalSubject(); 
+                $data['TotalPayment'] = AddFeesModel::getTotalPayment();
+
 
 
                 return view('admin.dashboard',$data);

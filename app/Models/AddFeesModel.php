@@ -26,4 +26,10 @@ class AddFeesModel extends Model
         ->where('add_fees.is_paid','=', 1)
         ->sum('add_fees.paid_amount');
     }
+    static public function getTotalPayment()
+    {
+        return self::where('add_fees.is_paid','=',1)
+            ->sum('add_fees.paid_amount');
+
+    }
 }

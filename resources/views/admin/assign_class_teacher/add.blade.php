@@ -44,7 +44,7 @@
                                 <div>
                                     <label>
                                         <input type ="checkbox"value="{{$classteacher->id}}" name="classteacher_id[]">{{$classteacher->name}}
-                                    </level>
+                                    </lebel>
                                 </div>
                                 @endforeach
         

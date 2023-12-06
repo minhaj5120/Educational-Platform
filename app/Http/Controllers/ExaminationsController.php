@@ -3,11 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use App\Models\ClassModel;
+use App\Models\ExamModel;
+use Auth;
+use App\Models\ClassSubjectModel;
+use App\Models\ExamScheduleModel;
+
+
+
 use Auth;
 use App\Models\ExamModel;
 use App\Models\ClassModel;
 use App\Models\ClassSubjectModel;
 use App\Models\ExamScheduleModel;
+
 
 class ExaminationsController extends Controller
 {
@@ -62,13 +72,18 @@ class ExaminationsController extends Controller
             abort(404);
         }
     }
-    
+
+
     public function exam_schedule(Request $request)
     {
         $data ['getClass'] = ClassModel::getClass();
         $data ['getExam'] = ExamModel::getExam();
 
         $result = array();
+
+
+        $result = array();
+
 
         if(!empty($request->get('exam_id')) && !empty($request->get('class_id')))
         {
@@ -107,12 +122,16 @@ class ExaminationsController extends Controller
 
         $data['getRecord'] = $result;
 
+
+        $data['getRecord'] = $result;
+
         $data['header_title'] = "Exam Schedule";
         return view("admin.examinations.exam_schedule", $data);
     }
 
     public function exam_schedule_insert(Request $request)
     {
+
         if(!empty($request->schedule))
         {
             ExamScheduleModel::deleteRecord($request->exam_id, $request->class_id);
@@ -133,7 +152,7 @@ class ExaminationsController extends Controller
                     $exam->created_by = Auth::user()->id;
                     $exam->save();
                 }
-                
+
             }
         }
         return redirect()->back()->with("success", "Exam Schedule successfully saved");
