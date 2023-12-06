@@ -15,9 +15,10 @@ class StudentAttendanceModel extends Model
         ->where('class_id','=',$class_id)
         ->where('date','=',$date)->first();
 
-
-
     }
+
+
+    
     static public function getRecord(){
         $return = self::select('student_attendance.*','class.name as class_name','student.name as student_name','student.last_name as student_last_name')
             ->join('class','class.id','=','student_attendance.class_id')

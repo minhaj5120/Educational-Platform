@@ -11,6 +11,9 @@ use App\Models\SubjectModel;
 use App\Models\ClassTeacherModel;
 use App\Models\AddFeesModel;
 
+use App\Models\ClassSubjectModel;
+use App\Models\StudentAttendanceModel;
+
 
 class DashboardController extends Controller
 {
@@ -28,8 +31,6 @@ class DashboardController extends Controller
                 $data['TotalSubject'] = SubjectModel::getTotalSubject(); 
                 $data['TotalPayment'] = AddFeesModel::getTotalPayment();
 
-
-
                 return view('admin.dashboard',$data);
                 }
 
@@ -43,6 +44,10 @@ class DashboardController extends Controller
                 }
 
             elseif ($user->category == 2) { 
+                $data['TotalPaidAmount'] = AddFeesModel::TotalPaidAmountStudent(Auth::user()->id);
+                $data['TotalSubject'] = ClassSubjectModel::MySubjectTotal(Auth::user()->class_id);
+                $data['TotalAttendance']=StudentAttendanceModel::getRecordStudentCount(Auth::user()->id);
+
                 return view('student.dashboard',$data); 
                 }
     

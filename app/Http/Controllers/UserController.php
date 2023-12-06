@@ -18,6 +18,11 @@ class UserController extends Controller
             return view("student.my_account", $data);
         }
         elseif(Auth::user()->category == 3)
+        if(Auth::user()->catagory == 2)
+        {
+            return view("student.my_account", $data);
+        }
+        if(Auth::user()->catagory == 3)
         {
             return view("teacher.my_account", $data);
         }
@@ -33,6 +38,8 @@ class UserController extends Controller
         $user->blood_group = trim($request->blood_group);
         $user->height = trim($request->height);
         $user->weight = trim($request->weight);
+        $user->email = trim($request->email);
+        $user->number = trim($request->number);
         $user->save();
         return redirect()->back()->with('success',"Account Updateed Successfully");
     }

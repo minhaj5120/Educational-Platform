@@ -54,4 +54,14 @@ class ClassSubjectModel extends Model
                     ->get();    
 
     }
+    static public function MySubjectTotal($class_id){
+        return self::select("class_subject.id")
+                    ->join("subject","subject.id","=","class_subject.subject_id")
+                    ->join("class","class.id","=","class_subject.class_id")
+                    ->where("class_subject.status","=", 0)
+                    ->where("class_subject.class_id","=", $class_id)
+                    ->orderBy("class_subject.id","desc")
+                    ->count();    
+
+    }
 }

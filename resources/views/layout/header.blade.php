@@ -52,6 +52,16 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{url('admin/payment/list')}}" class="nav-link @if(Request::segment(2)=='payment') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Payment
+              </p>
+            </a>
+          </li>
+
           <li class="nav-item @if(Request::segment(2)=='class' || Request::segment(2)=='subject' || Request::segment(2)=='assign_subject' || Request::segment(2)=='assign_class_teacher' || Request::segment(2)=='class_time') menu-is-opening menu-open @endif">
             <a href="#" class="nav-link @if(Request::segment(2)=='class' || Request::segment(2)=='subject' || Request::segment(2)=='assign_subject' || Request::segment(2)=='assign_class_teacher' || Request::segment(2)=='class_time') active @endif">
               <i class="nav-icon fas fa-table"></i>
@@ -200,7 +210,11 @@
           </li>
         @elseif(Auth::user()->category==2)
           <li class="nav-item">
+
             <a href="{{url('student/student/dashboard')}}" class="nav-link @if(Request::segment(3)=='dashboard') active @endif">
+
+            <a href="{{url('student/dashboard')}}" class="nav-link @if(Request::segment(3)=='dashboard') active @endif">
+
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -354,7 +368,19 @@
             </ul>
           </li>
           <li class="nav-item">
+
             <a href="{{url('teacher/my_account')}}" class="nav-link">
+
+            <a href="{{url('teacher/list')}}" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                My notice board
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('teacher/account')}}" class="nav-link">
+
               <i class="nav-icon far fa-user"></i>
               <p>
                 My Account
