@@ -46,7 +46,11 @@
                                 </div>
                                 <div class="form-group col-md-3">
                                     <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
+
                                     <a href="{{ url('admin/examinations/exam_schedule') }}" class="btn btn-success" style="margin-top: 30px;">Reset</a>
+
+                                    <a href="{{ 'url(admin/examinations/exam_schedule)' }}" class="btn btn-success" style="margin-top: 30px;">Reset</a>
+
                                 </div>
                                 </div>
                             </div>
@@ -66,7 +70,11 @@
                     <!-- /.card -->
                     @if(!empty($getRecord))
                     <form action="{{url('admin/examinations/exam_schedule_insert')}}" method="POST">
+
                         @csrf
+
+                        {{ csrf_field() }}
+
                             <input type="hidden" name="exam_id" value="{{ Request::get('exam_id') }}">
                             <input type="hidden" name="class_id" value="{{ Request::get('class_id') }}">
                     <div class="card">
@@ -101,6 +109,7 @@
                                             <input type="date" class="form-control" value="{{ $value['exam_date'] }}" name="schedule[{{ $i }}][exam_date]">
                                         </td>
                                         <td>
+
                                             <input type="time" class="form-control" value="{{ $value['start_time'] }}" name="schedule[{{$i}}][start_time">
                                         </td>
                                         <td>
@@ -114,6 +123,21 @@
                                         </td>
                                         <td>
                                             <input type="text" class="form-control" value="{{ $value['passing_marks'] }}" name="schedule[{{$i}}][passing_marks]"> 
+
+                                            <input type="time" class="form-control" value="{{ $value['start_time'] }}" name="schedule[{{ $i }}][start_time]">
+                                        </td>
+                                        <td>
+                                            <input type="time" class="form-control" value="{{ $value['end_time'] }}" name="schedule[{{ $i }}][end_time]">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" value="{{ $value['room_number'] }}" name="schedule[{{ $i }}][room_number]">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" value="{{ $value['full_marks'] }}" name="schedule[{{ $i }}][full_marks]">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" value="{{ $value['passing_marks'] }}" name="schedule[{{ $i }}][passing_marks]"> 
+
                                         </td>
                                     </tr>
                                     @php
@@ -142,5 +166,6 @@
 </div>
 <!-- /.content-wrapper -->
 @endsection
+
 
 

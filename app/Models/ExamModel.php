@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ExamModel extends Model
 {
     use HasFactory;
+
     protected $table = "exam";
     static public function getSingle($id)
     {
@@ -30,4 +31,5 @@ class ExamModel extends Model
                  ->orderBy('exam.name','asc')
                  ->get();
     }
+
 }

@@ -37,7 +37,13 @@
                             <label>Note</label>
                             <textarea class="form-control" name="note" placeholder="Note">"{{ $getRecord->note }}"</textarea>
 
+
                         </div>
+
+
+            
+                        </div>
+                        
 
                         <button type="submit" class="btn btn-primary btn-block" name="Submit">Update</button>
                     </form>

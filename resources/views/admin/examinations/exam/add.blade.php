@@ -37,7 +37,13 @@
                             <label>Note</label>
                             <textarea class="form-control" name="note" placeholder="Note"></textarea>
 
+
                         </div>
+
+
+            
+                        </div>
+                        
 
                         <button type="submit" class="btn btn-primary btn-block" name="Submit">Submit</button>
                     </form>
