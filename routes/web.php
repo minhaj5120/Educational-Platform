@@ -35,7 +35,9 @@ use App\Http\Controllers\AttendanceController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/homepage', [AuthController::class, 'homepage'])->name('homepage');
+Route::get('homepage/login', [AuthController::class, 'homepagelogin'])->name('homepagelogin');
+Route::get('homepage/registration', [AuthController::class, 'homepageregistration'])->name('homepageregistration');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 
 // Route::get('/login', [AuthController::class, 'login']); // This is for displaying the login form
@@ -132,6 +134,9 @@ Route::group(['middleware' => 'Admin'], function () {
     Route::get('admin/examinations/exam/delete/{id}', [ExaminationsController::class, 'exam_delete']);
     Route::get('admin/examinations/exam_schedule', [ExaminationsController::class, 'exam_schedule']);
     Route::post('admin/examinations/exam_schedule_insert', [ExaminationsController::class, 'exam_schedule_insert']);
+    Route::get('admin/examinations/mark_register', [ExaminationsController::class, 'mark_register']);
+    Route::post('admin/examinations/mark_register_save', [ExaminationsController::class, 'mark_register_save']);
+    
 
     //attendance
     Route::get('admin/attendance/student', [AttendanceController::class, 'student_attendance']);
@@ -168,6 +173,10 @@ Route::group(['middleware' => 'Teacher'], function () {
     Route::post('teacher/attendance/student/save', [AttendanceController::class, 'student_attendance_insert']);
     Route::get('teacher/attendance/report', [AttendanceController::class, 'teacher_student_attendance_report']);
 
+    //marks_register
+    Route::get('teacher/mark_register', [ExaminationsController::class, 'teacher_mark_register']);
+    Route::post('teacher/mark_register_save', [ExaminationsController::class, 'teacher_mark_register_save']);
+
 });
 Route::group(['middleware' => 'Student'], function () {
     Route::get('student/dashboard', [DashboardController::class, 'dashboard1'])->name('student.dashboard');
@@ -186,6 +195,9 @@ Route::group(['middleware' => 'Student'], function () {
     Route::get('student/my_calendar', [CalendarController::class, 'MyCalendar']);
     //my_attendance
     Route::get('student/my_attendance', [AttendanceController::class, 'my_attendance']);
+
+    //my_exam_result
+    Route::get('student/my_exam_result', [ExaminationsController::class, 'my_exam_result']);
 
 });
 

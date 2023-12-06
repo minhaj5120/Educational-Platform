@@ -156,6 +156,14 @@
                   </p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{url('admin/examinations/mark_register')}}" class="nav-link">
+                  <i class="nav-icon far fa-user"></i>
+                  <p>
+                    Marks Register 
+                  </p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item @if(Request::segment(2)=='attendance') menu-is-opening menu-open @endif">
@@ -227,7 +235,7 @@
             <a href="{{url('student/fees_collection')}}" class="nav-link @if(Request::segment(2)=='fees_collection') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                Fees Collection
+                Payment
               </p>
             </a>
           </li>
@@ -248,7 +256,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('student/list')}}" class="nav-link  @if(Request::segment(2)=='list') active @endif">
+            <a href="{{url('student/my_exam_result')}}" class="nav-link  @if(Request::segment(2)=='my_exam_result') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
                 My Exam Result
@@ -260,14 +268,6 @@
               <i class="nav-icon far fa-user"></i>
               <p>
                 My Attendance
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{url('student/list')}}" class="nav-link">
-              <i class="nav-icon far fa-user"></i>
-              <p>
-                My Exam Timetable
               </p>
             </a>
           </li>
@@ -327,7 +327,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('teacher/list')}}" class="nav-link">
+            <a href="{{url('teacher/mark_register')}}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
               <p>
                 Marks Register 
@@ -365,26 +365,10 @@
             <a href="{{url('teacher/list')}}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
               <p>
-                 Homework
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{url('teacher/list')}}" class="nav-link">
-              <i class="nav-icon far fa-user"></i>
-              <p>
                 My notice board
               </p>
             </a>
           </li>
-      <!--  <li class="nav-item">
-            <a href="{{url('teacher/list')}}" class="nav-link">
-              <i class="nav-icon far fa-user"></i>
-              <p>
-                Send email to students
-              </p>
-            </a>
-          </li>  -->  
           <li class="nav-item">
             <a href="{{url('teacher/list')}}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
