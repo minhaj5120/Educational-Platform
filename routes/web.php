@@ -16,10 +16,11 @@ use App\Http\Controllers\ClassTimeController;
 use App\Http\Controllers\ExaminationsController;
 
 use App\Http\Controllers\FeesCollectionController;
-
-
+use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\TeacherCalendarController;
+use App\Http\Controllers\AttendanceController;
+
 
 
 
@@ -36,7 +37,9 @@ use App\Http\Controllers\TeacherCalendarController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/homepage', [AuthController::class, 'homepage'])->name('homepage');
+Route::get('homepage/login', [AuthController::class, 'homepagelogin'])->name('homepagelogin');
+Route::get('homepage/registration', [AuthController::class, 'homepageregistration'])->name('homepageregistration');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 
 // Route::get('/login', [AuthController::class, 'login']); // This is for displaying the login form
@@ -124,6 +127,26 @@ Route::group(['middleware' => 'Admin'], function () {
     Route::get('admin/fees_collection/add_fees/{student_id}', [FeesCollectionController::class, 'add_fees']);
     Route::post('admin/fees_collection/add_fees/{student_id}', [FeesCollectionController::class, 'add_fees_insert']);
 
+    //exam
+    Route::get('admin/examinations/exam/list', [ExaminationsController::class, 'exam_list']);
+    Route::get('admin/examinations/exam/add', [ExaminationsController::class, 'exam_add']);
+    Route::post('admin/examinations/exam/add', [ExaminationsController::class, 'exam_insert']);
+    Route::get('admin/examinations/exam/edit/{id}', [ExaminationsController::class, 'exam_edit']);
+    Route::post('admin/examinations/exam/edit/{id}', [ExaminationsController::class, 'exam_update']);
+    Route::get('admin/examinations/exam/delete/{id}', [ExaminationsController::class, 'exam_delete']);
+    Route::get('admin/examinations/exam_schedule', [ExaminationsController::class, 'exam_schedule']);
+    Route::post('admin/examinations/exam_schedule_insert', [ExaminationsController::class, 'exam_schedule_insert']);
+    Route::get('admin/examinations/mark_register', [ExaminationsController::class, 'mark_register']);
+    Route::post('admin/examinations/mark_register_save', [ExaminationsController::class, 'mark_register_save']);
+    
+
+    //attendance
+    Route::get('admin/attendance/student', [AttendanceController::class, 'student_attendance']);
+    Route::post('admin/attendance/student/save', [AttendanceController::class, 'student_attendance_insert']);
+    Route::get('admin/attendance/report', [AttendanceController::class, 'student_attendance_report']);
+    
+    
+
     //change_password
     Route::get('admin/change_password', [UserController::class, 'change_password']);
     Route::post('admin/change_password', [UserController::class, 'update_change_password']);
@@ -149,17 +172,31 @@ Route::group(['middleware' => 'Admin'], function () {
 });
 Route::group(['middleware' => 'Teacher'], function () {
     Route::get('teacher/dashboard', [DashboardController::class, 'dashboard1'])->name('teacher.dashboard');
-    // Route::get('admin/admin/list', [AdminController::class, 'list']);
     //change_password
     Route::get('teacher/change_password', [UserController::class, 'change_password']);
     Route::post('teacher/change_password', [UserController::class, 'update_change_password']);
+    //my_class_subject
     Route::get('teacher/my_class_subject', [ClassTeacherController::class, 'my_class_subject']);
-    Route::get('teacher/my_student', [AdminStudentController::class, 'my_student']);
     Route::get('teacher/my_class_subject/class_time/{class_id}/{subject_id}', [ClassTimeController::class, 'teacher_class_time']);
+    //my_student
+    Route::get('teacher/my_student', [AdminStudentController::class, 'my_student']);
+    //my_calender
     Route::get('teacher/my_calendar', [TeacherCalendarController::class, 'MyCalendarTeacher']);
     Route::get('teacher/my_exam_timetable', [ExaminationsController::class, 'MyExamTimetableTeacher']);
 
     
+
+    //attendance
+    Route::get('teacher/attendance/student', [AttendanceController::class, 'teacher_student_attendance']);
+    Route::post('teacher/attendance/student/save', [AttendanceController::class, 'student_attendance_insert']);
+    Route::get('teacher/attendance/report', [AttendanceController::class, 'teacher_student_attendance_report']);
+
+    //marks_register
+    Route::get('teacher/mark_register', [ExaminationsController::class, 'teacher_mark_register']);
+    Route::post('teacher/mark_register_save', [ExaminationsController::class, 'teacher_mark_register_save']);
+    //my_account
+    Route::get('teacher/account', [UserController::class, 'MyAccount']);
+    Route::post('teacher/account', [UserController::class, 'UpdateMyAccount']);
 
 
 });
@@ -174,12 +211,22 @@ Route::group(['middleware' => 'Student'], function () {
     Route::get('student/fees_collection', [FeesCollectionController::class, 'student_collect_fees']);
     Route::post('student/fees_collection', [FeesCollectionController::class, 'student_collect_fees_payment']);
     
-
+    Route::get('student/my_subject', [SubjectController::class, 'my_subject']);
     Route::get('student/my_timetable', [ClassTimeController::class, 'MyTimetable']);
     
     Route::get('student/my_exam_timetable', [ExaminationsController::class, 'MyExamTimetable']);
 
     Route::get('student/my_calendar', [CalendarController::class, 'MyCalendar']);
+    //my_attendance
+    Route::get('student/my_attendance', [AttendanceController::class, 'my_attendance']);
+
+
+    //my_exam_result
+    Route::get('student/my_exam_result', [ExaminationsController::class, 'my_exam_result']);
+    //my_account
+    Route::get('student/my_account', [UserController::class, 'MyAccount']);    
+    Route::post('teacher/account', [UserController::class, 'UpdateMyAccount']);
+
 
 });
 

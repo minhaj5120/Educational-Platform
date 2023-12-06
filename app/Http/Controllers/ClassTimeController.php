@@ -115,15 +115,19 @@ class ClassTimeController extends Controller
     }
     public function MyTimetable()
     {
-        $getWeek=WeekModel::getRecord();
-        $week=array();
-        foreach($getWeek as $value){
-            $dataW=array(); 
-            $dataW['week_id']= $value->id;
-            $dataW['week_name']= $value->name;
-            
-            if(!empty($request->class_id) && !empty($request->subject_id)){
-                $classsubject=ClassTimeModel::getRecordClassTime( $request->class_id, $request->subject_id,$value->id);
+        $getRecoed=ClassSubjectModel::Myclasssubject(Auth::user()->class_id);
+        
+        
+        $result=array();
+        foreach($getRecoed as $value){
+            $dataS['subject_name']= $value->subject_name;
+
+            $getWeek=WeekModel::getRecord();
+            $week=array();
+            foreach($getWeek as $valueW){
+                $dataW=array();
+                $dataW['week_name']= $valueW->name;
+                $classsubject=ClassTimeModel::getRecordClassTime( $value->class_id, $value->subject_id,$valueW->id);
                 if(!empty($classsubject)){
                     $dataW['start_time']= $classsubject->start_time;
                     $dataW['end_time']= $classsubject->end_time;
@@ -134,16 +138,16 @@ class ClassTimeController extends Controller
                     $dataW['end_time']="";
                     $dataW['room_number']= "";
                 }
+                $week[]=$dataW;
+
             }
-            else{
-                $dataW['start_time']= "";
-                $dataW['end_time']="";
-                $dataW['room_number']="";
-            }
-            $week[] = $dataW;
+             
+            $dataS['week']=$week;
+            $result[]=$dataS;
         }
-        $data['week'] = $week;
-        $data['getRecord'] = ClassSubjectModel::Myclasssubject(Auth::user()->class_id);
+
+        $data['getRecord']=$result;
+        
         $data['header_title'] = "My Timetable";
         return view("student.student.my_timetable", $data); 
     }

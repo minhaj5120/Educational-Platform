@@ -10,6 +10,29 @@ use Hash;
 
 class UserController extends Controller
 {
+    public function MyAccount(){
+        $data['getRecord'] = User::getSingle(Auth::user()->id);
+        $data['header_title'] = "My Account";
+        if(Auth::user()->catagory == 2)
+        {
+            return view("student.my_account", $data);
+        }
+        if(Auth::user()->catagory == 3)
+        {
+            return view("teacher.my_account", $data);
+        }
+    }
+    public function UpdateMyAccount(Request $request){
+        $id = Auth::user()->id;
+        $user = User::getSingle($id);
+        $user->name = trim($request->name);
+        $user->email = trim($request->email);
+        $user->number = trim($request->number);
+        $user->save();
+        return redirect()->back()->with('success',"Account Updateed Successfully");
+    }
+    
+    
     public function change_password(){
         return view("profile.change_password");
     }

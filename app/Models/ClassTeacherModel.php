@@ -70,12 +70,6 @@ class ClassTeacherModel extends Model
             ->get();
     
 
-        // return self::select('subject.*','users.name as created_by_name')
-        // ->join('users','users.id','subject.created_by')
-        // // ->where('status', '=',0)
-        // ->where('subject.is_deleted','=',0)
-        // ->orderBy('id','desc')
-        // ->get();
     }
 
     static public function getClassSubjectGroup($teacher_id){
@@ -102,6 +96,15 @@ class ClassTeacherModel extends Model
             ->where("class_teacher.status", "=", 0) 
             ->where("class_teacher.is_deleted", "=", 0) 
             ->get();
+    }
+    static public function getClassSubjectGroup($teacher_id){
+        return self::select("class_teacher.*", "class.name as class_name", "class.id as class_id")
+            ->join("class", "class.id", "=", "class_teacher.class_id")
+            ->where("class_teacher.teacher_id","=", $teacher_id)
+            ->where("class_teacher.status", "=", 0) 
+            ->get();
+    
+
     }
 
 }

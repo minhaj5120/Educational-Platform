@@ -62,12 +62,12 @@ class SubjectController extends Controller
         return redirect("admin/subject/list")->with("success","Subject Deleted Successfully");
     }
     
-//    public function MySubject()
-//    {
-//        $data['getRecord'] = ClassSubjectModel::MySubject(Auth::user()-.class_id);
-//        $data['header_title'] = "My Subject";
-//        return view('student.mysubject',$data);
-//    }
+   public function my_subject()
+   {
+       $data['getRecord'] = ClassSubjectModel::MySubject(Auth::user()->class_id);
+       $data['header_title'] = "My Subject";
+       return view('student.my_subject',$data);
+   }
 
 
     public function search(Request $request)

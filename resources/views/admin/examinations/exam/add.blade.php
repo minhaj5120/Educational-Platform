@@ -31,14 +31,20 @@
                         <div class="form-group">
                             <label for="name">Exam Name</label>
                             <input type="text" class="form-control" name="name" required placeholder="Exam Name">
-        
+
                         </div>
                         <div class="form-group">
                             <label>Note</label>
                             <textarea class="form-control" name="note" placeholder="Note"></textarea>
+
+
+                        </div>
+
+
             
                         </div>
                         
+
                         <button type="submit" class="btn btn-primary btn-block" name="Submit">Submit</button>
                     </form>
                 </div>
