@@ -176,6 +176,10 @@ Route::group(['middleware' => 'Teacher'], function () {
     //marks_register
     Route::get('teacher/mark_register', [ExaminationsController::class, 'teacher_mark_register']);
     Route::post('teacher/mark_register_save', [ExaminationsController::class, 'teacher_mark_register_save']);
+    //my_account
+    Route::get('teacher/account', [UserController::class, 'MyAccount']);
+    Route::post('teacher/account', [UserController::class, 'UpdateMyAccount']);
+
 
 });
 Route::group(['middleware' => 'Student'], function () {
@@ -196,8 +200,13 @@ Route::group(['middleware' => 'Student'], function () {
     //my_attendance
     Route::get('student/my_attendance', [AttendanceController::class, 'my_attendance']);
 
+
     //my_exam_result
     Route::get('student/my_exam_result', [ExaminationsController::class, 'my_exam_result']);
+    //my_account
+    Route::get('student/my_account', [UserController::class, 'MyAccount']);    
+    Route::post('teacher/account', [UserController::class, 'UpdateMyAccount']);
+
 
 });
 
