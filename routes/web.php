@@ -168,6 +168,11 @@ Route::group(['middleware' => 'Teacher'], function () {
     Route::post('teacher/attendance/student/save', [AttendanceController::class, 'student_attendance_insert']);
     Route::get('teacher/attendance/report', [AttendanceController::class, 'teacher_student_attendance_report']);
 
+    //my_account
+    Route::get('teacher/account', [UserController::class, 'MyAccount']);
+    Route::post('teacher/account', [UserController::class, 'UpdateMyAccount']);
+
+
 });
 Route::group(['middleware' => 'Student'], function () {
     Route::get('student/dashboard', [DashboardController::class, 'dashboard1'])->name('student.dashboard');
@@ -186,6 +191,10 @@ Route::group(['middleware' => 'Student'], function () {
     Route::get('student/my_calendar', [CalendarController::class, 'MyCalendar']);
     //my_attendance
     Route::get('student/my_attendance', [AttendanceController::class, 'my_attendance']);
+
+    //my_account
+    Route::get('student/my_account', [UserController::class, 'MyAccount']);    
+//    Route::post('teacher/account', [UserController::class, 'UpdateMyAccount']);
 
 });
 

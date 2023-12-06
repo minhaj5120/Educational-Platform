@@ -386,10 +386,10 @@
             </a>
           </li>  -->  
           <li class="nav-item">
-            <a href="{{url('teacher/list')}}" class="nav-link">
+            <a href="{{url('teacher/account')}}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
               <p>
-                My Profile
+                My Account
               </p>
             </a>
           </li>
