@@ -205,23 +205,23 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('student/list')}}" class="nav-link">
-              <i class="nav-icon far fa-user"></i>
             <a href="{{url('student/my_timetable')}}" class="nav-link @if(Request::segment(2)=='my_timetable') active @endif">
-             <i class="nav-icon far fa-user"></i>
+              <i class="nav-icon far fa-user"></i>
               <p>
                 My Timetable
               </p>
             </a>
           </li>
+
           <li class="nav-item">
-            <a href="{{url('student/list')}}" class="nav-link">
+            <a href="{{url('student/my_exam_timetable')}}" class="nav-link @if(Request::segment(2)=='my_exam_timetable') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
                 My Exam Timetable
               </p>
             </a>
           </li>
+
           <li class="nav-item">
             <a href="{{url('student/list')}}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
@@ -235,14 +235,6 @@
               <i class="nav-icon far fa-user"></i>
               <p>
                 My Attendance
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{url('student/list')}}" class="nav-link">
-              <i class="nav-icon far fa-user"></i>
-              <p>
-                My Exam Timetable
               </p>
             </a>
           </li>
@@ -293,14 +285,16 @@
               </p>
             </a>
           </li>
+
           <li class="nav-item">
-            <a href="{{url('teacher/list')}}" class="nav-link">
+            <a href="{{url('teacher/my_exam_timetable')}}" class="nav-link @if(Request::segment(2)=='my_exam_timetable') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                My Exam timetable
+                My Exam Timetable
               </p>
             </a>
           </li>
+
           <li class="nav-item">
             <a href="{{url('teacher/list')}}" class="nav-link">
               <i class="nav-icon far fa-user"></i>

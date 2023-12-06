@@ -157,6 +157,9 @@ Route::group(['middleware' => 'Teacher'], function () {
     Route::get('teacher/my_student', [AdminStudentController::class, 'my_student']);
     Route::get('teacher/my_class_subject/class_time/{class_id}/{subject_id}', [ClassTimeController::class, 'teacher_class_time']);
     Route::get('teacher/my_calendar', [TeacherCalendarController::class, 'MyCalendarTeacher']);
+    Route::get('teacher/my_exam_timetable', [ExaminationsController::class, 'MyExamTimetableTeacher']);
+
+    
 
 
 });
@@ -173,6 +176,8 @@ Route::group(['middleware' => 'Student'], function () {
     
 
     Route::get('student/my_timetable', [ClassTimeController::class, 'MyTimetable']);
+    
+    Route::get('student/my_exam_timetable', [ExaminationsController::class, 'MyExamTimetable']);
 
     Route::get('student/my_calendar', [CalendarController::class, 'MyCalendar']);
 

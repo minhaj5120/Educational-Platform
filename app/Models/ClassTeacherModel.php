@@ -77,6 +77,19 @@ class ClassTeacherModel extends Model
         // ->orderBy('id','desc')
         // ->get();
     }
+
+    static public function getClassSubjectGroup($teacher_id){
+        return self::select("class_teacher.*", 'class.name as class_name', 'class.id as class_id' )
+            ->join("class", "class.id", "=", "class_teacher.class_id")
+            ->where("class_teacher.is_delete", "=", 0)
+            ->where("class_teacher.status", "=", 0)
+            ->where("class_teacher.teacher_id","=", $teacher_id)
+            ->groupBy('class_teacher.class_id')
+            ->orderBy("class_teacher.id", "desc")
+            ->get();
+    
+    }
+
     static public function getCalendarTeacher($teacher_id)
     {
         return ClassTeacherModel::select('class_time.*','class.name as class_name','subject.name as subject_name','week.name as week_name','week.fullcalendar_day')
