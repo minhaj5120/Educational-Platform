@@ -13,11 +13,11 @@ class UserController extends Controller
     public function MyAccount(){
         $data['getRecord'] = User::getSingle(Auth::user()->id);
         $data['header_title'] = "My Account";
-        if(Auth::user()->catagory == 2)
+        if(Auth::user()->category == 2)
         {
             return view("student.my_account", $data);
         }
-        if(Auth::user()->catagory == 3)
+        elseif(Auth::user()->category == 3)
         {
             return view("teacher.my_account", $data);
         }
@@ -26,8 +26,13 @@ class UserController extends Controller
         $id = Auth::user()->id;
         $user = User::getSingle($id);
         $user->name = trim($request->name);
+        $user->last_name = trim($request->last_name);
         $user->email = trim($request->email);
         $user->number = trim($request->number);
+        $user->date_of_birth = trim($request->date_of_birth);
+        $user->blood_group = trim($request->blood_group);
+        $user->height = trim($request->height);
+        $user->weight = trim($request->weight);
         $user->save();
         return redirect()->back()->with('success',"Account Updateed Successfully");
     }
